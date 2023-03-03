@@ -1,6 +1,8 @@
 #pragma once
 #include "raylib.h"
 #include "stdint.h"
+#include "Renderer.h"
+#include "RenderData.h"
 
 namespace bn
 {
@@ -13,9 +15,9 @@ namespace bn
         void Run();
 
     private:
-        uint32_t m_ScreenWidth;
-        uint32_t m_ScreenHeight;
+        bn::Renderer* m_Renderer;
+        bn::RenderData* m_Data = new bn::RenderData;      
 
         void Update();
     };
-} 
+}

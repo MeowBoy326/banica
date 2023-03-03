@@ -52,4 +52,5 @@ project "2223-9th-grade-sprint-math-games"
       symbols "On"
     
     filter "configurations:Release"
+      defines "BN_BUILD"
       optimize "On"

@@ -26,7 +26,8 @@ project "2223-9th-grade-sprint-math-games"
     includedirs
     {
       "vendor/raylib/include",
-      "%{prj.name}/src"
+      "%{prj.name}/src",
+      "vendor/raygui/include"
     }
 
     libdirs

@@ -3,7 +3,7 @@
 #include "RenderData.h"
 
 
-namespace bn
+namespace bnc
 {
     class Renderer
     {
@@ -11,6 +11,6 @@ namespace bn
         Renderer();
         ~Renderer();
 
-        void Render(bn::RenderData* data);
+        void Render(bnc::RenderData* data);
     };
 }

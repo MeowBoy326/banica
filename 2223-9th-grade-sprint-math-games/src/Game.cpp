@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <iostream>
 
-namespace bn
+namespace bnc
 {
     Game::Game(uint32_t width, uint32_t height, const char* title)
     {
@@ -22,7 +22,7 @@ namespace bn
 
     void Game::VariableInitialization()
     {
-        m_Renderer = new bn::Renderer();
+        m_Renderer = new bnc::Renderer();
 
         m_Data->cubePositionX = 0;
         m_Data->cubePositionY = GetScreenHeight();

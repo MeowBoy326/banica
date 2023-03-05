@@ -3,7 +3,7 @@
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 
-namespace bn
+namespace bnc
 {
     Renderer::Renderer()
     {
@@ -15,7 +15,7 @@ namespace bn
 
     }
 
-    void Renderer::Render(bn::RenderData* data)
+    void Renderer::Render(bnc::RenderData* data)
     {
         DrawRectangle(data->cubePositionX, (data->cubePositionY / 2) - 150, 300, 300, LIGHTGRAY);
         

@@ -4,7 +4,7 @@
 #include "Renderer.h"
 #include "RenderData.h"
 
-namespace bn
+namespace bnc
 {
     class Game
     {
@@ -15,8 +15,8 @@ namespace bn
         void Run();
 
     private:
-        bn::Renderer* m_Renderer;
-        bn::RenderData* m_Data = new bn::RenderData;      
+        bnc::Renderer* m_Renderer;
+        bnc::RenderData* m_Data = new bnc::RenderData;      
 
         void Update();
         void Configs();

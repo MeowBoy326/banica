@@ -12,5 +12,8 @@ namespace bnc
         ~Renderer();
 
         void Render(bnc::RenderData* data);
+
+    private:
+        void Clear();
     };
 }

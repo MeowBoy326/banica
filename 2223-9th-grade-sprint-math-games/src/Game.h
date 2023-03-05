@@ -1,6 +1,6 @@
 #pragma once
 #include "raylib.h"
-#include "stdint.h"
+#include <stdint.h>
 #include "Renderer.h"
 #include "RenderData.h"
 
@@ -16,7 +16,7 @@ namespace bnc
 
     private:
         bnc::Renderer* m_Renderer;
-        bnc::RenderData* m_Data = new bnc::RenderData;      
+        bnc::RenderData* m_Data;
 
         void Update();
         void Configs();

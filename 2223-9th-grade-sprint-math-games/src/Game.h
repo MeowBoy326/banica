@@ -19,5 +19,7 @@ namespace bn
         bn::RenderData* m_Data = new bn::RenderData;      
 
         void Update();
+        void Configs();
+        void VariableInitialization();
     };
 }

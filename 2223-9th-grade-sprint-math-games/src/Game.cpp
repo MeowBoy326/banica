@@ -1,17 +1,16 @@
 #include "Game.h"
-#include "iostream"
+#include <iostream>
 
 namespace bn
 {
     Game::Game(uint32_t width, uint32_t height, const char* title)
     {
+        Configs();
+
         InitWindow(width, height, title);
         SetTargetFPS(60);
-
-        m_Renderer = new bn::Renderer();
-
-        m_Data->cubePositionX = 0;
-        m_Data->cubePositionY = height;
+        
+        VariableInitialization();
     }
 
     Game::~Game()
@@ -19,6 +18,19 @@ namespace bn
         CloseWindow();
         delete m_Renderer;
         delete m_Data;
+    }
+
+    void Game::VariableInitialization()
+    {
+        m_Renderer = new bn::Renderer();
+
+        m_Data->cubePositionX = 0;
+        m_Data->cubePositionY = GetScreenHeight();
+    }
+
+    void Game::Configs()
+    {
+        SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     }
 
     void Game::Update()

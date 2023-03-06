@@ -1,5 +1,5 @@
 
-workspace "2223-9th-grade-sprint-math-games"
+workspace "Banica"
     configurations { 
         "Debug", 
         "Release" 
@@ -9,8 +9,8 @@ workspace "2223-9th-grade-sprint-math-games"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
    
-project "2223-9th-grade-sprint-math-games"
-    location "2223-9th-grade-sprint-math-games"
+project "Banica"
+    location "Banica"
     kind "ConsoleApp"
     language "C++"
     

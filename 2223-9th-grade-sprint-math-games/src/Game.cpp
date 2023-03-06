@@ -8,6 +8,7 @@ namespace bnc
         Configs();
 
         InitWindow(width, height, title);
+        SetTargetFPS(60);
         
         VariableInitialization();
     }
@@ -22,21 +23,20 @@ namespace bnc
     void Game::VariableInitialization()
     {
         m_Renderer = new bnc::Renderer();
-        m_Data = new bnc::RenderData();
+        m_Data = new bnc::RenderData;
+        m_GameWorld = new bnc::GameWorld(&m_GridCells);
 
-        m_Data->cubePositionX = 0;
-        m_Data->cubePositionY = GetScreenHeight();
+        m_Data->gridCells = &m_GridCells;
     }
 
     void Game::Configs()
     {
         SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-        SetTargetFPS(60);
     }
 
     void Game::Update()
     {
-        m_Data->cubePositionX += 5;
+        std::cout << m_GridCells.size() << std::endl;
     }
 
     void Game::Run()
@@ -45,6 +45,6 @@ namespace bnc
         {
             Update();
             m_Renderer->Render(m_Data);
-        }    
+        }
     }
 }

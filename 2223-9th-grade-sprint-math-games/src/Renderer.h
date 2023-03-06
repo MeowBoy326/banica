@@ -2,7 +2,6 @@
 #include "raylib.h"
 #include "RenderData.h"
 
-
 namespace bnc
 {
     class Renderer
@@ -15,5 +14,6 @@ namespace bnc
 
     private:
         void Clear();
+        void RenderGrid();
     };
 }

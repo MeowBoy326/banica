@@ -15,17 +15,19 @@ namespace bnc
 
     }
 
+    void Renderer::RenderGrid()
+    {
+
+    }
+
     void Renderer::Render(bnc::RenderData* data)
     {
         BeginDrawing();
 
         Clear();
 
-        DrawRectangle(data->cubePositionX, (data->cubePositionY / 2) - 150, 300, 300, LIGHTGRAY);
-        
-        GuiSetStyle(DEFAULT, TEXT_SIZE, 40);
-        GuiButton({ 10, 10, 300, 100 }, "TEST BUTTON");
-        
+        RenderGrid();
+
         DrawFPS(0, 0);
 
         EndDrawing();

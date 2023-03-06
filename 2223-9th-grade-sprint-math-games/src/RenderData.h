@@ -1,11 +1,12 @@
 #pragma once
 #include <stdint.h>
+#include "GridCell.h"
+#include <vector>
 
 namespace bnc
 {
     struct RenderData
     {
-        uint32_t cubePositionX;
-        uint32_t cubePositionY;
+        std::vector<GridCell*>* gridCells;
     };
 }

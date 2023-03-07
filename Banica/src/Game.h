@@ -5,7 +5,7 @@
 #include "Renderer.h"
 #include "RenderData.h"
 #include "GridCell.h"
-#include "GameWorld.h"
+#include "LevelGeneration.h"
 
 namespace bnc
 {
@@ -20,9 +20,10 @@ namespace bnc
     private:
         bnc::Renderer* m_Renderer;
         bnc::RenderData* m_Data;
-        bnc::GameWorld* m_GameWorld;
 
         std::vector<bnc::GridCell*> m_GridCells; 
+        bnc::LevelGenerator* m_LevelGenerator;
+        std::vector<Level*> m_Levels;
 
         void Update();
         void Configs();

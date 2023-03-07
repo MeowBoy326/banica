@@ -24,18 +24,19 @@ namespace bnc
     {
         m_Renderer = new bnc::Renderer();
         m_Data = new bnc::RenderData;
-        m_GameWorld = new bnc::GameWorld(&m_GridCells);
+        m_LevelGenerator = new bnc::LevelGenerator(&m_Levels, &m_GridCells);
 
         m_Data->gridCells = &m_GridCells;
     }
 
     void Game::Configs()
     {
-        // SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+        SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     }
 
     void Game::Update()
     {
+        
     }
 
     void Game::Run()

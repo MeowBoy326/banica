@@ -21,8 +21,6 @@ namespace bnc
         {
             DrawRectangle(m_Data->gridCells->operator[](i)->positionX, m_Data->gridCells->operator[](i)->positionY, 60, 60, LIGHTGRAY);
             DrawRectangle(m_Data->gridCells->operator[](i)->positionX + 2, m_Data->gridCells->operator[](i)->positionY + 2, 56, 56, RAYWHITE);
-
-            // DrawRectangleV(Vector2({m_Data->gridCells->operator[](i)->positionX, m_Data->gridCells->operator[](i)->positionY}), Vector2({60, 60}), LIGHTGRAY);
         }
     }
 

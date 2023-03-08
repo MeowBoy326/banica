@@ -12,9 +12,9 @@ namespace bnc
         delete m_GridCells;
     }
 
-    std::vector<GridCell*>* LevelOne::GetGridCells() const
+    std::vector<GridCell*>& LevelOne::GetGridCells() const
     {
-        return m_GridCells;
+        return *m_GridCells;
     }
 
     uint32_t LevelOne::GetSizeX() const 

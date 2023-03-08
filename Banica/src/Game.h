@@ -25,6 +25,8 @@ namespace bnc
         bnc::LevelGenerator* m_LevelGenerator;
         std::vector<Level*> m_Levels;
 
+        uint32_t m_CurrentLevel = 0;
+
         void Update();
         void Configs();
         void VariableInitialization();

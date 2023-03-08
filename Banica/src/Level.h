@@ -12,7 +12,7 @@ namespace bnc
         Level();
         virtual ~Level();
 
-        virtual std::vector<GridCell*>* GetGridCells() const = 0;
+        virtual std::vector<GridCell*>& GetGridCells() const = 0;
         virtual  uint32_t GetSizeX() const = 0;
         virtual  uint32_t GetSizeY() const = 0;
 

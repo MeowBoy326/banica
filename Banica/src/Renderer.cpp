@@ -17,10 +17,13 @@ namespace bnc
 
     void Renderer::RenderGrid()
     {
-        for(size_t i = 0; i < m_Data->gridCells->size(); i++)
+        std::vector<GridCell*> cellsInfo = m_Data->levels->operator[](*m_Data->currentLevel)->GetGridCells();
+
+        DrawRectangleLinesEx(Rectangle({float(cellsInfo[0]->positionX - 1.5f), float(cellsInfo[0]->positionY - 1.5f), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeX() * 60 + 3.0f), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeY() * 60 + 3.0f)}), 1.5f, LIGHTGRAY);
+
+        for(size_t i = 0; i < cellsInfo.size(); i++)
         {
-            DrawRectangle(m_Data->gridCells->operator[](i)->positionX, m_Data->gridCells->operator[](i)->positionY, 60, 60, LIGHTGRAY);
-            DrawRectangle(m_Data->gridCells->operator[](i)->positionX + 2, m_Data->gridCells->operator[](i)->positionY + 2, 56, 56, RAYWHITE);
+            DrawRectangleLinesEx(Rectangle({cellsInfo[i]->positionX, cellsInfo[i]->positionY, 60, 60}), 1.5f, LIGHTGRAY);
         }
     }
 

@@ -9,7 +9,7 @@ namespace bnc
         LevelOne(std::vector<GridCell*>* grid);
         virtual ~LevelOne();
 
-        std::vector<GridCell*>* GetGridCells() const;
+        std::vector<GridCell*>& GetGridCells() const;
         uint32_t GetSizeX() const ;
         uint32_t GetSizeY() const ;
     private:

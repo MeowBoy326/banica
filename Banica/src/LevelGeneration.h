@@ -11,21 +11,15 @@ namespace bnc
     class LevelGenerator
     {
     public:
-        LevelGenerator(std::vector<Level*>* levels, std::vector<GridCell*>* gridCells);
+        LevelGenerator(std::vector<Level*>& levels, std::vector<GridCell*>& gridCells, uint32_t& currentLevel);
         ~LevelGenerator();
 
-        void GenerateLevel();
+        void GenerateLevel(std::vector<Level*>& levels, uint32_t& currentLevel);
 
     private:
         uint32_t m_Scale = 60;
         uint32_t m_GridCellPositionX = 0;
         uint32_t m_GridCellPositionY = 0;
-
-        uint32_t m_CurrentLevel = 0;
-
-        std::vector<Level*>* m_Levels;
-        std::vector<GridCell*>* m_GridCells;
-
 
         LevelOne* m_FirstLevel;
     };

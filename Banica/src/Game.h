@@ -6,6 +6,8 @@
 #include "RenderData.h"
 #include "GridCell.h"
 #include "LevelGeneration.h"
+#include "Player.h"
+#include "InputHandler.h"
 
 namespace bnc
 {
@@ -20,10 +22,13 @@ namespace bnc
     private:
         bnc::Renderer* m_Renderer;
         bnc::RenderData* m_Data;
+        bnc::Player* m_Player;
 
         std::vector<bnc::GridCell*> m_GridCells; 
         bnc::LevelGenerator* m_LevelGenerator;
         std::vector<Level*> m_Levels;
+
+        bnc::InputHandler* m_InputHandler;
 
         uint32_t m_CurrentLevel = 0;
 

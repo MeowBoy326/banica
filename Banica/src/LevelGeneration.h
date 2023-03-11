@@ -6,13 +6,14 @@
 #include "Level.h"
 #include "Player.h"
 #include "Levels/Levels.h"
+#include "Gate.h"
 
 namespace bnc
 {
     class LevelGenerator
     {
     public:
-        LevelGenerator(std::vector<bnc::Level*>& levels, std::vector<bnc::GridCell*>& gridCells, uint32_t& currentLevel, bnc::Player& player);
+        LevelGenerator(std::vector<bnc::Level*>& levels, std::vector<bnc::GridCell*>& gridCells, uint32_t& currentLevel, bnc::Player& player, std::vector<bnc::Gate*>* gates);
         ~LevelGenerator();
 
         void GenerateLevel(std::vector<bnc::Level*>& levels, uint32_t& currentLevel);

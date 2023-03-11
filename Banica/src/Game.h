@@ -8,6 +8,7 @@
 #include "LevelGeneration.h"
 #include "Player.h"
 #include "InputHandler.h"
+#include "Gate.h"
 
 namespace bnc
 {
@@ -29,6 +30,8 @@ namespace bnc
         std::vector<bnc::Level*> m_Levels;
 
         bnc::InputHandler* m_InputHandler;
+
+        std::vector<bnc::Gate*> m_Gates;
 
         uint32_t m_CurrentLevel = 0;
 

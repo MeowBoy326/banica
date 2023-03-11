@@ -2,9 +2,9 @@
 
 namespace bnc
 {
-    LevelGenerator::LevelGenerator(std::vector<bnc::Level*>& levels, std::vector<bnc::GridCell*>& gridCells, uint32_t& currentLevel, bnc::Player& player)
+    LevelGenerator::LevelGenerator(std::vector<bnc::Level*>& levels, std::vector<bnc::GridCell*>& gridCells, uint32_t& currentLevel, bnc::Player& player, std::vector<Gate*>* gates)
     {
-        m_FirstLevel = new bnc::LevelOne(&gridCells, player);
+        m_FirstLevel = new bnc::LevelOne(&gridCells, player, gates);
         levels.push_back(m_FirstLevel);        
 
         GenerateLevel(levels, currentLevel);

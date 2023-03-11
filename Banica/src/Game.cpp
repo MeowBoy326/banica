@@ -27,7 +27,7 @@ namespace bnc
         m_Data = new bnc::RenderData;
         m_Player = new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel);
 
-        m_LevelGenerator = new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel, *m_Player);
+        m_LevelGenerator = new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel, *m_Player, &m_Gates);
 
         m_Data->levels = &m_Levels;
         m_Data->currentLevel = &m_CurrentLevel;
@@ -50,6 +50,12 @@ namespace bnc
 
         m_InputHandler->HandleInput(m_Player, m_Levels, m_CurrentLevel);
         m_Player->UpdatePlayer();
+        
+        for (size_t i = 0; i < m_Gates.size(); i++)
+        {
+            m_Gates[i]->OnUpdate(m_GridCells);
+        }
+        
     }
 
     void Game::Run()

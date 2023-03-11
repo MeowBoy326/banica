@@ -23,14 +23,15 @@ namespace bnc
 
     void Game::VariableInitialization()
     {
-        m_Renderer = new bnc::Renderer();
+        m_Renderer = new bnc::Renderer;
         m_Data = new bnc::RenderData;
-        m_LevelGenerator = new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel);
+        m_Player = new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel);
+
+        m_LevelGenerator = new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel, *m_Player);
 
         m_Data->levels = &m_Levels;
         m_Data->currentLevel = &m_CurrentLevel;
 
-        m_Player = new Player(&m_GridCells, &m_Levels, &m_CurrentLevel);
         m_InputHandler = new bnc::InputHandler;
     }
 

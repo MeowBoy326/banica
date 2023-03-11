@@ -2,13 +2,13 @@
 
 namespace bnc
 {
-    Player::Player(std::vector<GridCell*>* cells, std::vector<Level*>* levels, uint32_t* currentLevel)
+    Player::Player(std::vector<bnc::GridCell*>* cells, std::vector<bnc::Level*>* levels, uint32_t* currentLevel)
     {
         m_GridCells = cells; 
         m_Levels = levels;
         m_CurrentLevel = currentLevel;
 
-        cells->operator[](m_PlayerCurrentPosition)->isPlayerHere = true;
+        // cells->operator[](m_PlayerCurrentPosition)->isPlayerHere = true;
     }
 
     Player::~Player()
@@ -22,6 +22,12 @@ namespace bnc
         m_GridCells->operator[](m_PlayerCurrentPosition)->isPlayerHere = false; 
         m_PlayerCurrentPosition = m_PlayerNewPositon;
         m_GridCells->operator[](m_PlayerNewPositon)->isPlayerHere = true;
+    }
+
+    void Player::SetPlayerPosition(uint32_t position)
+    {
+        m_PlayerCurrentPosition = position;
+        m_PlayerNewPositon = position;
     }
 
     uint32_t Player::GetPlayerPosition() const

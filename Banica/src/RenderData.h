@@ -8,7 +8,7 @@ namespace bnc
 {
     struct RenderData
     {
-        std::vector<Level*>* levels;
+        std::vector<bnc::Level*>* levels;
         uint32_t* currentLevel;
     };
 }

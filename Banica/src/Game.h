@@ -26,7 +26,7 @@ namespace bnc
 
         std::vector<bnc::GridCell*> m_GridCells; 
         bnc::LevelGenerator* m_LevelGenerator;
-        std::vector<Level*> m_Levels;
+        std::vector<bnc::Level*> m_Levels;
 
         bnc::InputHandler* m_InputHandler;
 

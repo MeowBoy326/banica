@@ -8,5 +8,6 @@ namespace bnc
         bool isPlayerHere = false;
         float positionX = 0;
         float positionY = 0;
+        bool isGateHere = false;
     };
 }

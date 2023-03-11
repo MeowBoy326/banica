@@ -13,7 +13,7 @@ namespace bnc
 
     }
 
-    void InputHandler::HandleInput(Player* player, std::vector<Level*>& levels, uint32_t& curretnLevel)
+    void InputHandler::HandleInput(bnc::Player* player, std::vector<bnc::Level*>& levels, uint32_t& curretnLevel)
     {
 
         if((IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) && player->GetPlayerPosition() < levels[curretnLevel]->GetGridCells().size() - 1)

@@ -14,10 +14,11 @@ namespace bnc
 
     private:
         RenderData* m_Data;
-        std::vector<GridCell*> m_CellsInfo;
+        std::vector<bnc::GridCell*> m_CellsInfo;
 
         void Clear();
         void RenderGrid();
         void RenderPlayer();
+        void RenderGates();
     };
 }

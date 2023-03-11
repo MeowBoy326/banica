@@ -38,6 +38,38 @@ namespace bnc
         }
     }
 
+    void Renderer::RenderGates()
+    {
+        uint32_t currentGate = 0;
+
+        for (size_t i = 0; i < m_CellsInfo.size(); i++)
+        {
+            if(m_CellsInfo[i]->isGateHere == true)
+            {
+                //* Find the type of the gate and render it accordingly
+                switch (m_Data->levels->operator[](*m_Data->currentLevel)->GetGates()[currentGate]->GetType())
+                {
+                case bnc::AND:
+                    DrawRectangle(m_CellsInfo[i]->positionX + 1.5f, m_CellsInfo[i]->positionY + 1.5f, 60 - 3.0f, 60 - 3.0f, DARKBLUE);
+                    break;
+                case bnc::OR:
+                    DrawRectangle(m_CellsInfo[i]->positionX + 1.5f, m_CellsInfo[i]->positionY + 1.5f, 60 - 3.0f, 60 - 3.0f, RED);
+                    break;
+                case bnc::NOT:
+                    DrawRectangle(m_CellsInfo[i]->positionX + 1.5f, m_CellsInfo[i]->positionY + 1.5f, 60 - 3.0f, 60 - 3.0f, PURPLE);
+                    break;
+                case bnc::XOR:
+                    DrawRectangle(m_CellsInfo[i]->positionX + 1.5f, m_CellsInfo[i]->positionY + 1.5f, 60 - 3.0f, 60 - 3.0f, YELLOW);
+                    break; 
+                default:
+                    break;
+                }
+
+                currentGate++;
+            }
+        }
+    }
+
     void Renderer::Render(bnc::RenderData* data)
     {
         m_Data = data;
@@ -48,6 +80,7 @@ namespace bnc
 
         RenderGrid();
         RenderPlayer();
+        RenderGates();
 
         DrawFPS(0, 0);
 

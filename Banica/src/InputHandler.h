@@ -10,7 +10,7 @@ namespace bnc
         InputHandler();
         ~InputHandler();
 
-        void HandleInput(Player* player, std::vector<Level*>& levels, uint32_t& currentLevel);
+        void HandleInput(bnc::Player* player, std::vector<bnc::Level*>& levels, uint32_t& currentLevel);
 
     private:
         uint32_t m_Timer = 12;

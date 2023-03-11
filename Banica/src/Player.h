@@ -10,7 +10,7 @@ namespace bnc
     class Player
     {
     public:
-        Player(std::vector<GridCell*>* cells, std::vector<Level*>* levels, uint32_t* currentLevel);
+        Player(std::vector<bnc::GridCell*>* cells, std::vector<Level*>* levels, uint32_t* currentLevel);
         ~Player();
 
         void UpdatePlayer(); 
@@ -21,13 +21,14 @@ namespace bnc
         void MovePlayerDown();
 
         uint32_t GetPlayerPosition() const;
+        void SetPlayerPosition(uint32_t position);
     private:
-        std::vector<GridCell*>* m_GridCells;
-        std::vector<Level*>* m_Levels;
+        std::vector<bnc::GridCell*>* m_GridCells;
+        std::vector<bnc::Level*>* m_Levels;
 
         uint32_t* m_CurrentLevel;
 
-        uint32_t m_PlayerCurrentPosition = 45;
-        uint32_t m_PlayerNewPositon = 45;
+        uint32_t m_PlayerCurrentPosition = 0;
+        uint32_t m_PlayerNewPositon = 0;
     };
 }

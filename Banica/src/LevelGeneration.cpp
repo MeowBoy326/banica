@@ -26,8 +26,8 @@ namespace bnc
             for(size_t j = 0; j < levels[currentLevel]->GetSizeX(); j++)
             {
                 GridCell* cell = new bnc::GridCell;
-                cell->positionX = m_GridCellPositionX;
-                cell->positionY = m_GridCellPositionY;
+                cell->position.x = m_GridCellPositionX;
+                cell->position.y = m_GridCellPositionY;
 
                 levels[currentLevel]->GetGridCells().push_back(cell);
 

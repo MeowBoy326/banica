@@ -1,7 +1,7 @@
 #pragma once 
 #include "Level.h"
 #include "Player.h"
-#include "Gates/AndGate.h"
+#include "Gates/Gates.h"
 
 namespace bnc
 {

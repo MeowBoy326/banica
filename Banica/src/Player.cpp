@@ -19,9 +19,9 @@ namespace bnc
 
     void Player::UpdatePlayer()
     {
-        m_GridCells->operator[](m_PlayerCurrentPosition)->isPlayerHere = false; 
+        m_GridCells->operator[](m_PlayerCurrentPosition)->titleType = bnc::NONE; 
         m_PlayerCurrentPosition = m_PlayerNewPositon;
-        m_GridCells->operator[](m_PlayerNewPositon)->isPlayerHere = true;
+        m_GridCells->operator[](m_PlayerNewPositon)->titleType = bnc::PLAYER;
     }
 
     void Player::SetPlayerPosition(uint32_t position)

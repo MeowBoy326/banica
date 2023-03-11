@@ -1,13 +1,19 @@
 #pragma once
 #include <stdint.h>
+#include "raylib.h"
 
 namespace bnc
 {
+    enum
+    {
+        NONE,
+        PLAYER,
+        GATE
+    };
+
     struct GridCell
     {
-        bool isPlayerHere = false;
-        float positionX = 0;
-        float positionY = 0;
-        bool isGateHere = false;
+        uint32_t titleType = bnc::NONE;
+        Vector2 position;
     };
 }

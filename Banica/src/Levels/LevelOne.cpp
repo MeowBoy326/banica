@@ -5,7 +5,7 @@ namespace bnc
     LevelOne::LevelOne(std::vector<bnc::GridCell*>* grid, bnc::Player& player)
     {
         m_GridCells = grid;
-        player.SetPlayerPosition(25);
+        player.SetPlayerPosition(10);
     }
 
     LevelOne::~LevelOne()
@@ -31,12 +31,14 @@ namespace bnc
     void LevelOne::SetGates()
     {
         m_Gates.reserve(10);
-        m_Gates.push_back(new AndGate(40));
-        m_Gates.push_back(new AndGate(55));
+        m_Gates.push_back(new AndGate(45));
+        m_Gates.push_back(new OrGate(55));
+        m_Gates.push_back(new NotGate(65));
+        m_Gates.push_back(new XorGate(75));
 
         for(size_t i = 0; i < m_Gates.size(); i++)
         {
-            m_GridCells->operator[](m_Gates[i]->GetCellPosition())->isGateHere = true;
+            m_GridCells->operator[](m_Gates[i]->GetCellPosition())->titleType = bnc::GATE;
         }
     }
 

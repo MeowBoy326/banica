@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "Player.h"
+#include "Gate.h"
 
 namespace bnc
 {

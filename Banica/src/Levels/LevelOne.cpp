@@ -20,10 +20,10 @@ namespace bnc
 
     void LevelOne::SetGates()
     {
-        m_Gates->push_back(new AndGate(45));
-        m_Gates->push_back(new OrGate(55));
-        m_Gates->push_back(new NotGate(65));
-        m_Gates->push_back(new XorGate(75));
+        m_Gates->push_back(new AndGate(42));
+        m_Gates->push_back(new OrGate(44));
+        m_Gates->push_back(new NotGate(46));
+        // m_Gates->push_back(new XorGate(48));
 
         for(size_t i = 0; i < m_Gates->size(); i++)
         {

@@ -17,6 +17,7 @@ namespace bnc
         ~LevelGenerator();
 
         void GenerateLevel(std::vector<bnc::Level*>& levels, uint32_t& currentLevel);
+        void SetObjects();
 
     private:
         uint32_t m_Scale = 60;

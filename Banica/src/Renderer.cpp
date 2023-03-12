@@ -1,7 +1,8 @@
 #include "Renderer.h"
 
-#define RAYGUI_IMPLEMENTATION
-#include "raygui.h"
+// #define RAYGUI_IMPLEMENTATION
+// #include "raygui.h"
+#include <iostream>
 
 namespace bnc
 {
@@ -40,14 +41,21 @@ namespace bnc
 
     void Renderer::RenderGates()
     {
-        uint32_t currentGate = 0;
-
         for (size_t i = 0; i < m_CellsInfo.size(); i++)
         {
             if(m_CellsInfo[i]->titleType == bnc::GATE)
             {
                 //* Find the type of the gate and render it accordingly
-                switch (m_Data->levels->operator[](*m_Data->currentLevel)->GetGates()[currentGate]->GetType())
+                uint32_t temp; 
+                for (size_t j = 0; j < m_Data->levels->operator[](*m_Data->currentLevel)->GetGates().size(); j++)
+                {
+                    if(m_Data->levels->operator[](*m_Data->currentLevel)->GetGates()[j]->GetCellPosition() == i)
+                    {
+                       temp = m_Data->levels->operator[](*m_Data->currentLevel)->GetGates()[j]->GetType(); 
+                    }
+                }
+                
+                switch (temp)
                 {
                 case bnc::AND:
                     DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, DARKBLUE);
@@ -64,8 +72,6 @@ namespace bnc
                 default:
                     break;
                 }
-
-                currentGate++;
             }
         }
     }

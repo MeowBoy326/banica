@@ -39,7 +39,10 @@ namespace bnc
 
         m_GridCellPositionX = (GetScreenWidth() / 2)  - ((levels[currentLevel]->GetSizeX()) * m_Scale) / 2;
         m_GridCellPositionY = (GetScreenHeight() / 2)  - ((levels[currentLevel]->GetSizeY()) * m_Scale) / 2;
+    }
 
+    void LevelGenerator::SetObjects()
+    {
         m_FirstLevel->SetGates();
     }
 }

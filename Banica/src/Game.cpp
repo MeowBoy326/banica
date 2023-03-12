@@ -15,10 +15,10 @@ namespace bnc
 
     Game::~Game()
     {
+        //delete m_Renderer;
+        //delete m_Data;
+        //delete m_Player;
         CloseWindow();
-        delete m_Renderer;
-        delete m_Data;
-        delete m_Player;
     }
 
     void Game::VariableInitialization()
@@ -28,6 +28,7 @@ namespace bnc
         m_Player = new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel);
 
         m_LevelGenerator = new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel, *m_Player, &m_Gates);
+        m_LevelGenerator->SetObjects();
 
         m_Data->levels = &m_Levels;
         m_Data->currentLevel = &m_CurrentLevel;

@@ -31,21 +31,21 @@ namespace bnc
 
     void Gate::MoveGateLeft()
     {
-
+        m_GridCellNewPosition--;
     }
 
     void Gate::MoveGateRight()
     {
-    
+        m_GridCellNewPosition++;
     }
 
-    void Gate::MoveGateUp()
+    void Gate::MoveGateUp(uint32_t sizeX)
     {
-
+        m_GridCellNewPosition -= sizeX;
     }
 
-    void Gate::MoveGateDown()
+    void Gate::MoveGateDown(uint32_t sizeX)
     {
-
+        m_GridCellNewPosition += sizeX;
     }
 }

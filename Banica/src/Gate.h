@@ -25,8 +25,8 @@ namespace bnc
 
         void MoveGateLeft();
         void MoveGateRight();
-        void MoveGateUp();
-        void MoveGateDown();
+        void MoveGateUp(uint32_t sizeX);
+        void MoveGateDown(uint32_t sizeX);
     protected:
         std::vector<bnc::GridCell*>* m_GridCells;
 

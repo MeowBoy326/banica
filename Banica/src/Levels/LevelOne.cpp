@@ -6,27 +6,16 @@ namespace bnc
     {
         m_GridCells = grid;
         m_Gates = gates;
+        
+        m_SizeX = 10;
+        m_SizeY = 10;
+
         player.SetPlayerPosition(10);
     }
 
     LevelOne::~LevelOne()
     {
-        delete m_GridCells;
-    }
 
-    std::vector<bnc::GridCell*>& LevelOne::GetGridCells() const
-    {
-        return *m_GridCells;
-    }
-
-    uint32_t LevelOne::GetSizeX() const 
-    {
-        return m_SizeX;
-    }
-
-    uint32_t LevelOne::GetSizeY() const
-    {
-        return m_SizeY;
     }
 
     void LevelOne::SetGates()
@@ -40,10 +29,5 @@ namespace bnc
         {
             m_GridCells->operator[](m_Gates->operator[](i)->GetCellPosition())->titleType = bnc::GATE;
         }
-    }
-
-    std::vector<bnc::Gate*>& LevelOne::GetGates()
-    {
-        return *m_Gates;
     }
 }

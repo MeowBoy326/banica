@@ -19,10 +19,17 @@ namespace bnc
         Gate();
         ~Gate();
 
-        virtual uint32_t GetType() const = 0;
-        virtual uint32_t GetCellPosition() const = 0;
-        virtual void OnUpdate(std::vector<bnc::GridCell*>& cells) = 0;
-    private:
+        uint32_t GetType() const;
+        uint32_t GetCellPosition() const;
+        void OnUpdate(std::vector<bnc::GridCell*>* cells);
+
+        void MoveGateLeft();
+        void MoveGateRight();
+        void MoveGateUp();
+        void MoveGateDown();
+    protected:
+        std::vector<bnc::GridCell*>* m_GridCells;
+
         uint32_t m_Type;
         uint32_t m_GridCellPosition;
         uint32_t m_GridCellNewPosition;

@@ -13,16 +13,17 @@ namespace bnc
         Level();
         ~Level();
 
-        virtual std::vector<bnc::GridCell*>& GetGridCells() const = 0;
-        virtual std::vector<bnc::Gate*>& GetGates() = 0;
-        virtual uint32_t GetSizeX() const = 0;
-        virtual uint32_t GetSizeY() const = 0;
+        std::vector<bnc::GridCell*>& GetGridCells() const;
+        std::vector<bnc::Gate*>& GetGates() const;
+        uint32_t GetSizeX() const;
+        uint32_t GetSizeY() const;
+
         virtual void SetGates() = 0; 
 
-    private:
+    protected:
         std::vector<bnc::GridCell*>* m_GridCells;
-        std::vector<bnc::Gate*> m_Gates;
-        uint32_t m_SizeX = 0;
-        uint32_t m_SizeY = 0;
+        std::vector<bnc::Gate*>* m_Gates;
+        uint32_t m_SizeX;
+        uint32_t m_SizeY;
     };
 }

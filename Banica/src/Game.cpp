@@ -53,7 +53,7 @@ namespace bnc
         
         for (size_t i = 0; i < m_Gates.size(); i++)
         {
-            m_Gates[i]->OnUpdate(m_GridCells);
+            m_Gates[i]->OnUpdate(&m_GridCells);
         }
         
     }

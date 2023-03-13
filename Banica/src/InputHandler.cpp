@@ -20,16 +20,19 @@ namespace bnc
         {
             if(m_Timer >= 12)
             {
-                player->MovePlayerRight();
+                if(levels[curretnLevel]->GetGridCells()[player->GetPlayerPosition() + 1]->isMovable == true)
+                    player->MovePlayerRight();
 
                 for (size_t i = 0; i < levels[curretnLevel]->GetGates().size(); i++)
                 {
+                    
                     if(levels[curretnLevel]->GetGridCells()[levels[curretnLevel]->GetGates()[i]->GetCellPosition() - 1]->titleType == bnc::PLAYER 
                     && 
                     levels[curretnLevel]->GetGates()[i]->GetCellPosition() < levels[curretnLevel]->GetGridCells().size()  - levels[curretnLevel]->GetSizeX() - 1 
                     && 
                     levels[curretnLevel]->GetGridCells()[levels[curretnLevel]->GetGates()[i]->GetCellPosition() + 1]->titleType == bnc::NONE)
                     {
+                        player->MovePlayerRight();
                         levels[curretnLevel]->GetGates()[i]->MoveGateRight();
                     }
                 }
@@ -43,7 +46,8 @@ namespace bnc
         {
             if(m_Timer >= 12)
             {
-                player->MovePlayerLeft();
+                if(levels[curretnLevel]->GetGridCells()[player->GetPlayerPosition() - 1]->isMovable == true)
+                    player->MovePlayerLeft();
 
                 for (size_t i = 0; i < levels[curretnLevel]->GetGates().size(); i++)
                 {
@@ -54,6 +58,7 @@ namespace bnc
                     levels[curretnLevel]->GetGridCells()[levels[curretnLevel]->GetGates()[i]->GetCellPosition() - 1]->titleType == bnc::NONE)
                     {
                         levels[curretnLevel]->GetGates()[i]->MoveGateLeft();
+                        player->MovePlayerLeft();
                     }
                 }
 
@@ -66,7 +71,8 @@ namespace bnc
         {
             if(m_Timer >= 12)
             {
-                player->MovePlayerUp();
+                if(levels[curretnLevel]->GetGridCells()[player->GetPlayerPosition() - levels[curretnLevel]->GetSizeX()]->isMovable == true)
+                    player->MovePlayerUp();
 
                 for (size_t i = 0; i < levels[curretnLevel]->GetGates().size(); i++)
                 {
@@ -77,6 +83,7 @@ namespace bnc
                     levels[curretnLevel]->GetGridCells()[levels[curretnLevel]->GetGates()[i]->GetCellPosition() - levels[curretnLevel]->GetSizeX()]->titleType == bnc::NONE)
                     {
                         levels[curretnLevel]->GetGates()[i]->MoveGateUp(levels[curretnLevel]->GetSizeX());
+                        player->MovePlayerUp();
                     }
                 }
 
@@ -90,7 +97,8 @@ namespace bnc
             if(m_Timer >= 12)
             {
 
-                player->MovePlayerDown();
+                if(levels[curretnLevel]->GetGridCells()[player->GetPlayerPosition() + levels[curretnLevel]->GetSizeX()]->isMovable == true)
+                    player->MovePlayerDown();
 
                 for (size_t i = 0; i < levels[curretnLevel]->GetGates().size(); i++)
                 {
@@ -101,6 +109,7 @@ namespace bnc
                     levels[curretnLevel]->GetGridCells()[levels[curretnLevel]->GetGates()[i]->GetCellPosition() + levels[curretnLevel]->GetSizeX()]->titleType == bnc::NONE)
                     {
                         levels[curretnLevel]->GetGates()[i]->MoveGateDown(levels[curretnLevel]->GetSizeX());
+                        player->MovePlayerDown();
                     }
                 }
 

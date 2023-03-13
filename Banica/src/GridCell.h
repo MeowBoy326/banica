@@ -15,5 +15,6 @@ namespace bnc
     {
         uint32_t titleType = bnc::NONE;
         Vector2 position;
+        bool isMovable = true;
     };
 }

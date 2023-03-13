@@ -22,7 +22,7 @@ namespace bnc
         uint32_t GetType() const;
         uint32_t GetCellPosition() const;
         void OnUpdate(std::vector<bnc::GridCell*>* cells);
-
+        
         void MoveGateLeft();
         void MoveGateRight();
         void MoveGateUp(uint32_t sizeX);
@@ -33,5 +33,6 @@ namespace bnc
         uint32_t m_Type;
         uint32_t m_GridCellPosition;
         uint32_t m_GridCellNewPosition;
+
     };
 }

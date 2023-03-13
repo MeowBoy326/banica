@@ -56,7 +56,18 @@ namespace bnc
         {
             m_Gates[i]->OnUpdate(&m_GridCells);
         }
-        
+
+        for (size_t i = 0; i < m_GridCells.size(); i++)
+        {
+            if(m_GridCells[i]->titleType != bnc::NONE)
+            {
+                m_GridCells[i]->isMovable = false;
+            }
+            else
+            {
+                m_GridCells[i]->isMovable = true;
+            }
+        }
     }
 
     void Game::Run()

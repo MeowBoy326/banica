@@ -7,16 +7,17 @@
 #include "Player.h"
 #include "Levels/Levels.h"
 #include "Gate.h"
+#include <memory>
 
 namespace bnc
 {
     class LevelGenerator
     {
     public:
-        LevelGenerator(std::vector<bnc::Level*>& levels, std::vector<bnc::GridCell*>& gridCells, uint32_t& currentLevel, bnc::Player& player, std::vector<bnc::Gate*>* gates);
+        LevelGenerator(std::vector<std::shared_ptr<bnc::Level>>& levels, std::vector<std::shared_ptr<GridCell>>& gridCells, uint32_t& currentLevel, std::shared_ptr<Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates);
         ~LevelGenerator();
 
-        void GenerateLevel(std::vector<bnc::Level*>& levels, uint32_t& currentLevel);
+        void GenerateLevel(std::vector<std::shared_ptr<Level>>& levels, uint32_t& currentLevel);
         void SetObjects();
 
     private:
@@ -24,6 +25,6 @@ namespace bnc
         uint32_t m_GridCellPositionX = 0;
         uint32_t m_GridCellPositionY = 0;
 
-        LevelOne* m_FirstLevel;
+        std::shared_ptr<Level> m_LevelOne;
     };
 }

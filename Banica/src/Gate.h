@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <vector>
 #include "GridCell.h"
+#include <memory>
 
 namespace bnc
 {
@@ -21,14 +22,14 @@ namespace bnc
 
         uint32_t GetType() const;
         uint32_t GetCellPosition() const;
-        void OnUpdate(std::vector<bnc::GridCell*>* cells);
+        void OnUpdate(std::vector<std::shared_ptr<bnc::GridCell>>* cells);
         
         void MoveGateLeft();
         void MoveGateRight();
         void MoveGateUp(uint32_t sizeX);
         void MoveGateDown(uint32_t sizeX);
     protected:
-        std::vector<bnc::GridCell*>* m_GridCells;
+        std::vector<std::shared_ptr<bnc::GridCell>>* m_GridCells;
 
         uint32_t m_Type;
         uint32_t m_GridCellPosition;

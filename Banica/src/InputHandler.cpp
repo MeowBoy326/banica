@@ -13,10 +13,10 @@ namespace bnc
 
     }
 
-    void InputHandler::HandleInput(bnc::Player* player, std::vector<bnc::Level*>& levels, uint32_t& curretnLevel)
+    void InputHandler::HandleInput(std::shared_ptr<bnc::Player> player, std::vector<std::shared_ptr<Level>>& levels, uint32_t& curretnLevel)
     {
-        std::vector<bnc::GridCell* >& r_Grid = levels[curretnLevel]->GetGridCells();
-        std::vector<bnc::Gate* >& r_Gates = levels[curretnLevel]->GetGates();
+        std::vector<std::shared_ptr<bnc::GridCell> >& r_Grid = levels[curretnLevel]->GetGridCells();
+        std::vector<std::shared_ptr<bnc::Gate> >& r_Gates = levels[curretnLevel]->GetGates();
 
         //* RIGHT
         if((IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) && player->GetPlayerPosition() < r_Grid.size() - 1)

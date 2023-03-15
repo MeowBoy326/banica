@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "RenderData.h"
+#include <memory>
 
 namespace bnc
 {
@@ -10,11 +11,11 @@ namespace bnc
         Renderer();
         ~Renderer();
 
-        void Render(bnc::RenderData* data);
+        void Render(std::shared_ptr<RenderData> data);
 
     private:
-        RenderData* m_Data;
-        std::vector<bnc::GridCell*> m_CellsInfo;
+        std::shared_ptr<RenderData> m_Data;
+        std::vector<std::shared_ptr<GridCell>> m_CellsInfo;
 
         void Clear();
         void RenderGrid();

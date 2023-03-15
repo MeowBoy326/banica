@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "InputHandler.h"
 #include "Gate.h"
+#include <memory>
 
 namespace bnc
 {
@@ -21,17 +22,17 @@ namespace bnc
         void Run();
 
     private:
-        bnc::Renderer* m_Renderer;
-        bnc::RenderData* m_Data;
-        bnc::Player* m_Player;
+        std::unique_ptr<bnc::Renderer> m_Renderer;
+        std::shared_ptr<bnc::RenderData> m_Data;
+        std::shared_ptr<bnc::Player> m_Player;
 
-        std::vector<bnc::GridCell*> m_GridCells; 
-        bnc::LevelGenerator* m_LevelGenerator;
-        std::vector<bnc::Level*> m_Levels;
+        std::vector<std::shared_ptr<bnc::GridCell>> m_GridCells; 
+        std::unique_ptr<LevelGenerator> m_LevelGenerator;
+        std::vector<std::shared_ptr<Level>> m_Levels;
 
-        bnc::InputHandler* m_InputHandler;
+        std::unique_ptr<bnc::InputHandler> m_InputHandler;
 
-        std::vector<bnc::Gate*> m_Gates;
+        std::vector<std::shared_ptr<Gate>> m_Gates;
 
         uint32_t m_CurrentLevel = 0;
 

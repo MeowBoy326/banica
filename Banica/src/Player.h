@@ -4,13 +4,14 @@
 #include <vector>
 #include <stdint.h>
 #include "Level.h"
+#include <memory>
 
 namespace bnc
 {
     class Player
     {
     public:
-        Player(std::vector<bnc::GridCell*>* cells, std::vector<Level*>* levels, uint32_t* currentLevel);
+        Player(std::vector<std::shared_ptr<GridCell>>* cells, std::vector<std::shared_ptr<Level>>* levels, uint32_t* currentLevel);
         ~Player();
 
         void UpdatePlayer(); 
@@ -23,8 +24,8 @@ namespace bnc
         uint32_t GetPlayerPosition() const;
         void SetPlayerPosition(uint32_t position);
     private:
-        std::vector<bnc::GridCell*>* m_GridCells;
-        std::vector<bnc::Level*>* m_Levels;
+        std::vector<std::shared_ptr<GridCell>>* m_GridCells;
+        std::vector<std::shared_ptr<Level>>* m_Levels;
 
         uint32_t* m_CurrentLevel;
 

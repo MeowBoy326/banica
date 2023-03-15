@@ -22,7 +22,7 @@ namespace bnc
         return m_Type;
     }
 
-    void Gate::OnUpdate(std::vector<bnc::GridCell*>* cells)
+    void Gate::OnUpdate(std::vector<std::shared_ptr<GridCell>>* cells)
     {
         cells->operator[](m_GridCellPosition)->titleType = bnc::NONE;
         m_GridCellPosition = m_GridCellNewPosition;

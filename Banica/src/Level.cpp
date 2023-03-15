@@ -12,7 +12,7 @@ namespace bnc
 
     }
 
-    std::vector<bnc::GridCell*>& Level::GetGridCells() const
+    std::vector<std::shared_ptr<GridCell>>& Level::GetGridCells() const
     {
         return *m_GridCells;
     }
@@ -27,7 +27,7 @@ namespace bnc
         return m_SizeY;
     }
 
-    std::vector<bnc::Gate*>& Level::GetGates() const
+    std::vector<std::shared_ptr<bnc::Gate>>& Level::GetGates() const
     {
         return *m_Gates;
     }

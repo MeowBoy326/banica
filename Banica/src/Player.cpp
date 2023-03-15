@@ -2,7 +2,7 @@
 
 namespace bnc
 {
-    Player::Player(std::vector<bnc::GridCell*>* cells, std::vector<bnc::Level*>* levels, uint32_t* currentLevel)
+    Player::Player(std::vector<std::shared_ptr<GridCell>>* cells, std::vector<std::shared_ptr<bnc::Level>>* levels, uint32_t* currentLevel)
     {
         m_GridCells = cells; 
         m_Levels = levels;
@@ -13,8 +13,7 @@ namespace bnc
 
     Player::~Player()
     {
-        delete m_GridCells;
-        delete m_CurrentLevel;
+
     }
 
     void Player::UpdatePlayer()

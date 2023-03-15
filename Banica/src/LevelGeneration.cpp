@@ -2,21 +2,20 @@
 
 namespace bnc
 {
-    LevelGenerator::LevelGenerator(std::vector<bnc::Level*>& levels, std::vector<bnc::GridCell*>& gridCells, uint32_t& currentLevel, bnc::Player& player, std::vector<Gate*>* gates)
+    LevelGenerator::LevelGenerator(std::vector<std::shared_ptr<bnc::Level>>& levels, std::vector<std::shared_ptr<GridCell>>& gridCells, uint32_t& currentLevel, std::shared_ptr<Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates)
     {
-        m_FirstLevel = new bnc::LevelOne(&gridCells, player, gates);
-        levels.push_back(m_FirstLevel);        
+        m_LevelOne = std::shared_ptr<Level>(new bnc::LevelOne(&gridCells, player, gates));    
+        levels.push_back(m_LevelOne);   
 
         GenerateLevel(levels, currentLevel);
     }
 
     LevelGenerator::~LevelGenerator()
     {
-        // DELEATING ALL LEVELS HERE
-        delete m_FirstLevel;
+
     }
 
-    void LevelGenerator::GenerateLevel(std::vector<bnc::Level*>& levels, uint32_t& currentLevel)
+    void LevelGenerator::GenerateLevel(std::vector<std::shared_ptr<bnc::Level>>& levels, uint32_t& currentLevel)
     {
         m_GridCellPositionX = (GetScreenWidth() / 2)  - ((levels[currentLevel]->GetSizeX()) * m_Scale) / 2;
         m_GridCellPositionY = (GetScreenHeight() / 2)  - ((levels[currentLevel]->GetSizeY()) * m_Scale) / 2;
@@ -25,7 +24,7 @@ namespace bnc
         {
             for(size_t j = 0; j < levels[currentLevel]->GetSizeX(); j++)
             {
-                GridCell* cell = new bnc::GridCell;
+                std::shared_ptr<GridCell> cell = std::shared_ptr<GridCell>(new bnc::GridCell);
                 cell->position.x = m_GridCellPositionX;
                 cell->position.y = m_GridCellPositionY;
 
@@ -43,6 +42,6 @@ namespace bnc
 
     void LevelGenerator::SetObjects()
     {
-        m_FirstLevel->SetGates();
+        m_LevelOne->SetGates();
     }
 }

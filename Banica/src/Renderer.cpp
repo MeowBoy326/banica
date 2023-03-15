@@ -13,7 +13,7 @@ namespace bnc
 
     Renderer::~Renderer()
     {
-        delete m_Data;
+
     }
 
     void Renderer::RenderGrid()
@@ -76,7 +76,7 @@ namespace bnc
         }
     }
 
-    void Renderer::Render(bnc::RenderData* data)
+    void Renderer::Render(std::shared_ptr<bnc::RenderData> data)
     {
         m_Data = data;
 

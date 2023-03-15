@@ -15,25 +15,22 @@ namespace bnc
 
     Game::~Game()
     {
-        //delete m_Renderer;
-        //delete m_Data;
-        //delete m_Player;
         CloseWindow();
     }
 
     void Game::VariableInitialization()
     {
-        m_Renderer = new bnc::Renderer;
-        m_Data = new bnc::RenderData;
-        m_Player = new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel);
+        m_Renderer = std::unique_ptr<bnc::Renderer>(new Renderer);
+        m_Data = std::shared_ptr<bnc::RenderData>(new bnc::RenderData);
+        m_Player = std::shared_ptr<bnc::Player>( new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel));
 
-        m_LevelGenerator = new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel, *m_Player, &m_Gates);
+        m_LevelGenerator = std::unique_ptr<bnc::LevelGenerator>(new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel, m_Player, &m_Gates));
         m_LevelGenerator->SetObjects();
 
         m_Data->levels = &m_Levels;
         m_Data->currentLevel = &m_CurrentLevel;
 
-        m_InputHandler = new bnc::InputHandler;
+        m_InputHandler = std::unique_ptr<bnc::InputHandler>(new bnc::InputHandler);
     }
 
     void Game::Configs()

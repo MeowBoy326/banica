@@ -23,7 +23,7 @@ namespace bnc
         m_Gates->push_back(new AndGate(42));
         m_Gates->push_back(new OrGate(44));
         m_Gates->push_back(new NotGate(46));
-        // m_Gates->push_back(new XorGate(48));
+        m_Gates->push_back(new XorGate(48));
 
         for(size_t i = 0; i < m_Gates->size(); i++)
         {

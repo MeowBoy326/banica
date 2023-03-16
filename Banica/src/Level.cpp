@@ -31,4 +31,9 @@ namespace bnc
     {
         return *m_Gates;
     }
+    
+    std::vector<std::shared_ptr<bnc::Lamp>>& Level::GetLamps() const
+    {
+        return *m_Lamps;
+    }
 }

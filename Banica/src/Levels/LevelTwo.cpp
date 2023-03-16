@@ -1,31 +1,29 @@
-#include "LevelOne.h"
+#include "LevelTwo.h"
 #include <memory>
 
 namespace bnc
 {
-    LevelOne::LevelOne(std::vector<std::shared_ptr<bnc::GridCell>>* grid, std::shared_ptr<bnc::Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps)
+    LevelTwo::LevelTwo(std::vector<std::shared_ptr<bnc::GridCell>>* grid, std::shared_ptr<bnc::Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps)
     {
         m_GridCells = grid;
         m_Gates = gates;
         m_Lamps = lamps;
         
-        m_SizeX = 10;
+        m_SizeX = 15;
         m_SizeY = 10;
 
-        player->SetPlayerPosition(10);
+        player->SetPlayerPosition(20);
     }
 
-    LevelOne::~LevelOne()
+    LevelTwo::~LevelTwo()
     {
 
     }
 
-    void LevelOne::SetGates()
+    void LevelTwo::SetGates()
     {
         m_Gates->push_back(std::shared_ptr<Gate> (new AndGate(42)));
         m_Gates->push_back(std::shared_ptr<Gate> (new OrGate(44)));
-        m_Gates->push_back(std::shared_ptr<Gate> (new NotGate(46)));
-        m_Gates->push_back(std::shared_ptr<Gate> (new XorGate(48)));
 
         for(size_t i = 0; i < m_Gates->size(); i++)
         {
@@ -33,9 +31,12 @@ namespace bnc
         }
     }
 
-    void LevelOne::SetLamps()
+    void LevelTwo::SetLamps()
     {
         m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(15, true)));
+        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(16, false)));
+        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(17, false)));
+        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(18, true)));
 
         for(size_t i = 0; i < m_Lamps->size(); i++)
         {

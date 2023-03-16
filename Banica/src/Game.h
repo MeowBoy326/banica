@@ -10,6 +10,7 @@
 #include "InputHandler.h"
 #include "Gate.h"
 #include <memory>
+#include "Lamp.h"
 
 namespace bnc
 {
@@ -28,16 +29,20 @@ namespace bnc
 
         std::vector<std::shared_ptr<bnc::GridCell>> m_GridCells; 
         std::unique_ptr<LevelGenerator> m_LevelGenerator;
+
         std::vector<std::shared_ptr<Level>> m_Levels;
+        std::vector<std::shared_ptr<Lamp>> m_Lamps;
 
         std::unique_ptr<bnc::InputHandler> m_InputHandler;
 
         std::vector<std::shared_ptr<Gate>> m_Gates;
+
 
         uint32_t m_CurrentLevel = 0;
 
         void Update();
         void Configs();
         void VariableInitialization();
+        void ClearLevel();
     };
 }

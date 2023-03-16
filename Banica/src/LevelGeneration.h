@@ -14,7 +14,7 @@ namespace bnc
     class LevelGenerator
     {
     public:
-        LevelGenerator(std::vector<std::shared_ptr<bnc::Level>>& levels, std::vector<std::shared_ptr<GridCell>>& gridCells, uint32_t& currentLevel, std::shared_ptr<Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates);
+        LevelGenerator(std::vector<std::shared_ptr<bnc::Level>>& levels, std::vector<std::shared_ptr<GridCell>>& gridCells, uint32_t& currentLevel, std::shared_ptr<Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps);
         ~LevelGenerator();
 
         void GenerateLevel(std::vector<std::shared_ptr<Level>>& levels, uint32_t& currentLevel);
@@ -25,6 +25,9 @@ namespace bnc
         uint32_t m_GridCellPositionX = 0;
         uint32_t m_GridCellPositionY = 0;
 
+        std::shared_ptr<Level> m_LatestLevel;
+
         std::shared_ptr<Level> m_LevelOne;
+        std::shared_ptr<Level> m_LevelTwo;
     };
 }

@@ -76,6 +76,30 @@ namespace bnc
         }
     }
 
+    void Renderer::RenderLamps()
+    {
+        std::vector<std::shared_ptr<Lamp>>& r_lamps = m_Data->levels->operator[](*m_Data->currentLevel)->GetLamps();
+
+       for (size_t i = 0; i < m_CellsInfo.size(); i++)
+       {
+            if(m_CellsInfo[i]->titleType == bnc::LAMP)
+            {
+                for (size_t j = 0; j < r_lamps.size(); j++)
+                {
+                    if(r_lamps[j]->GetIsOn())
+                    {
+                        DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, BROWN);
+                    }
+                    else
+                    {
+                        DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, DARKGRAY);
+                    }
+                }
+                
+            }
+       }
+    }
+
     void Renderer::Render(std::shared_ptr<bnc::RenderData> data)
     {
         m_Data = data;
@@ -87,6 +111,7 @@ namespace bnc
         RenderGrid();
         RenderPlayer();
         RenderGates();
+        RenderLamps();
 
         DrawFPS(0, 0);
 

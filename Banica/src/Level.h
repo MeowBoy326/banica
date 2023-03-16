@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "GridCell.h"
 #include "Gate.h"
+#include "Lamp.h"
 
 namespace bnc
 {
@@ -16,14 +17,18 @@ namespace bnc
 
         std::vector<std::shared_ptr<bnc::GridCell>>& GetGridCells() const;
         std::vector<std::shared_ptr<bnc::Gate>>& GetGates() const;
+        std::vector<std::shared_ptr<bnc::Lamp>>& GetLamps() const;
         uint32_t GetSizeX() const;
         uint32_t GetSizeY() const;
 
         virtual void SetGates() = 0; 
+        virtual void SetLamps() = 0; 
 
     protected:
         std::vector<std::shared_ptr<bnc::GridCell>>* m_GridCells;
         std::vector<std::shared_ptr<bnc::Gate>>* m_Gates;
+        std::vector<std::shared_ptr<bnc::Lamp>>* m_Lamps;
+
         uint32_t m_SizeX;
         uint32_t m_SizeY;
     };

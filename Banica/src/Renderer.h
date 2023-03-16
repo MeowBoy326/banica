@@ -21,5 +21,6 @@ namespace bnc
         void RenderGrid();
         void RenderPlayer();
         void RenderGates();
+        void RenderLamps();
     };
 }

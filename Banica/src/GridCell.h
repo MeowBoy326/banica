@@ -8,7 +8,8 @@ namespace bnc
     {
         NONE,
         PLAYER,
-        GATE
+        GATE,
+        LAMP
     };
 
     struct GridCell

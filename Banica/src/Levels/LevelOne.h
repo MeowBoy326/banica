@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Gates/Gates.h"
 #include <vector>
+#include <string>
 #include <memory>
 
 namespace bnc

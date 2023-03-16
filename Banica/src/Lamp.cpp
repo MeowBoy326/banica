@@ -2,10 +2,10 @@
 
 namespace bnc
 {
-    Lamp::Lamp(uint32_t position, bool state)
+    Lamp::Lamp(uint32_t position, uint32_t type)
     {
         m_Position = position;
-        m_IsOn = state;
+        m_Type = type;
     }
 
     Lamp::~Lamp()
@@ -13,9 +13,9 @@ namespace bnc
 
     }
 
-    bool Lamp::GetIsOn() const
+    uint32_t Lamp::GetType() const
     {
-        return m_IsOn;
+        return m_Type;
     }
 
     uint32_t Lamp::GetPosition() const
@@ -23,9 +23,9 @@ namespace bnc
         return m_Position;
     }
 
-    void Lamp::SetIsOn(bool state)
+    void Lamp::SetState(uint32_t val)
     {
-        m_IsOn = state;
+        m_Type = val;
     }
 
 

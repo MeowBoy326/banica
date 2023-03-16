@@ -9,7 +9,9 @@ namespace bnc
         NONE,
         PLAYER,
         GATE,
-        LAMP
+        LAMP,
+        LAMP_ON,
+        LAMP_OFF
     };
 
     struct GridCell

@@ -10,16 +10,16 @@ namespace bnc
     class Lamp
     {
     public:
-        Lamp(uint32_t position, bool state);
+        Lamp(uint32_t position, uint32_t type);
         ~Lamp();
 
         uint32_t GetPosition() const;
-        bool GetIsOn() const;
+        uint32_t GetType() const;
 
         void OnUpdate(std::vector<std::shared_ptr<GridCell>>& grid);
-        void SetIsOn(bool state);
+        void SetState(uint32_t val);
     private:
-        bool m_IsOn = false;
+        uint32_t m_Type;
         uint32_t m_Position;
     };
 }

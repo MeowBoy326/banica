@@ -1,5 +1,6 @@
 #include "LevelOne.h"
 #include <memory>
+#include <iostream>
 
 namespace bnc
 {
@@ -24,8 +25,6 @@ namespace bnc
     {
         m_Gates->push_back(std::shared_ptr<Gate> (new AndGate(42)));
         m_Gates->push_back(std::shared_ptr<Gate> (new OrGate(44)));
-        m_Gates->push_back(std::shared_ptr<Gate> (new NotGate(46)));
-        m_Gates->push_back(std::shared_ptr<Gate> (new XorGate(48)));
 
         for(size_t i = 0; i < m_Gates->size(); i++)
         {
@@ -35,7 +34,56 @@ namespace bnc
 
     void LevelOne::SetLamps()
     {
-        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(15, true)));
+        uint32_t lampPosition = 10;
+        uint32_t lampResultPosition = 39;
+
+        std::string firstPart = "1011";
+        std::string secondPart = "1100";
+        std::string result = "1111";
+
+        for (size_t i = 0; i < firstPart.size(); i++)
+        {
+            if(firstPart[i] == '1')
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampPosition, bnc::LAMP_ON)));
+            }
+            else
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampPosition, bnc::LAMP_OFF)));
+            }
+
+            lampPosition++;
+        }
+
+        lampPosition++;
+        
+        for (size_t i = 0; i < secondPart.size(); i++)
+        {
+            if(secondPart[i] == '1')
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampPosition, bnc::LAMP_ON)));
+            }
+            else
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampPosition, bnc::LAMP_OFF)));
+            }
+
+            lampPosition++;
+        }
+
+        for (size_t i = 0; i < result.size(); i++)
+        {
+            if(result[i] == '1')
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampResultPosition, bnc::LAMP_ON)));
+            }
+            else
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampResultPosition, bnc::LAMP_OFF)));
+            }
+
+            lampResultPosition += m_SizeX;
+        }
 
         for(size_t i = 0; i < m_Lamps->size(); i++)
         {

@@ -3,11 +3,12 @@
 
 namespace bnc
 {
-    LevelTwo::LevelTwo(std::vector<std::shared_ptr<bnc::GridCell>>* grid, std::shared_ptr<bnc::Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps)
+    LevelTwo::LevelTwo(std::vector<std::shared_ptr<bnc::GridCell>>* grid, std::shared_ptr<bnc::Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps, std::vector<std::shared_ptr<LevelSolution>>& solutions)
     {
         m_GridCells = grid;
         m_Gates = gates;
         m_Lamps = lamps;
+        m_Solution = &solutions;
         
         m_SizeX = 15;
         m_SizeY = 10;
@@ -33,10 +34,13 @@ namespace bnc
 
     void LevelTwo::SetLamps()
     {
-        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(15, true)));
-        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(16, false)));
-        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(17, false)));
-        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(18, true)));
+        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(15, bnc::LAMP_ON)));
+        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(16, bnc::LAMP_OFF)));
+        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(17, bnc::LAMP_OFF)));
+        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(18, bnc::LAMP_ON)));
+
+        // dummmy solution for testing
+        m_Solution->push_back(std::shared_ptr<LevelSolution> (new LevelSolution{0, bnc::AND}));
 
         for(size_t i = 0; i < m_Lamps->size(); i++)
         {

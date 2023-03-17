@@ -20,11 +20,11 @@ namespace bnc
     {
         m_CellsInfo = m_Data->levels->operator[](*m_Data->currentLevel)->GetGridCells();
 
-        DrawRectangleLinesEx(Rectangle({float(m_CellsInfo[0]->position.x - 1.5f), float(m_CellsInfo[0]->position.y - 1.5f), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeX() * 60 + 3.0f), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeY() * 60 + 3.0f)}), 1.5f, LIGHTGRAY);
+        DrawRectangleLinesEx(Rectangle({float(m_CellsInfo[0]->position.x - m_LineSize), float(m_CellsInfo[0]->position.y - m_LineSize), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeX() * 60 + m_LineSize * 2), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeY() * 60 + m_LineSize * 2)}), m_LineSize, LIGHTGRAY);
 
         for(size_t i = 0; i < m_CellsInfo.size(); i++)
         {
-            DrawRectangleLinesEx(Rectangle({m_CellsInfo[i]->position.x, m_CellsInfo[i]->position.y, 60, 60}), 1.5f, LIGHTGRAY);
+            DrawRectangleLinesEx(Rectangle({m_CellsInfo[i]->position.x, m_CellsInfo[i]->position.y, 60, 60}), m_LineSize, LIGHTGRAY);
         }
     }
 
@@ -34,7 +34,7 @@ namespace bnc
         {
             if(m_CellsInfo[i]->titleType == bnc::PLAYER)
             {
-                DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, DARKGREEN);
+                DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, DARKGREEN);
             }
         }
     }
@@ -58,16 +58,16 @@ namespace bnc
                 switch (temp)
                 {
                 case bnc::AND:
-                    DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, DARKBLUE);
+                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, DARKBLUE);
                     break;
                 case bnc::OR:
-                    DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, RED);
+                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, RED);
                     break;
                 case bnc::NOT:
-                    DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, PURPLE);
+                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, PURPLE);
                     break;
                 case bnc::XOR:
-                    DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, YELLOW);
+                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, YELLOW);
                     break; 
                 default:
                     break;
@@ -97,11 +97,11 @@ namespace bnc
             {
                 if(temp == bnc::LAMP_ON)
                 {
-                    DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, GOLD);
+                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, GOLD);
                 }
                 else
                 {
-                    DrawRectangle(m_CellsInfo[i]->position.x + 1.5f, m_CellsInfo[i]->position.y + 1.5f, 60 - 3.0f, 60 - 3.0f, DARKGRAY);
+                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, DARKGRAY);
                 }
             }
         }

@@ -17,6 +17,8 @@ namespace bnc
         std::shared_ptr<RenderData> m_Data;
         std::vector<std::shared_ptr<GridCell>> m_CellsInfo;
 
+        float m_LineSize = 1.5;
+
         void Clear();
         void RenderGrid();
         void RenderPlayer();

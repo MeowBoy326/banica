@@ -4,11 +4,12 @@
 
 namespace bnc
 {
-    LevelOne::LevelOne(std::vector<std::shared_ptr<bnc::GridCell>>* grid, std::shared_ptr<bnc::Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps)
+    LevelOne::LevelOne(std::vector<std::shared_ptr<bnc::GridCell>>* grid, std::shared_ptr<bnc::Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps, std::vector<std::shared_ptr<LevelSolution>>& solutions)
     {
         m_GridCells = grid;
         m_Gates = gates;
         m_Lamps = lamps;
+        m_Solution = &solutions;
         
         m_SizeX = 10;
         m_SizeY = 10;
@@ -23,8 +24,8 @@ namespace bnc
 
     void LevelOne::SetGates()
     {
-        m_Gates->push_back(std::shared_ptr<Gate> (new AndGate(42)));
-        m_Gates->push_back(std::shared_ptr<Gate> (new OrGate(44)));
+        m_Gates->push_back(std::shared_ptr<Gate> (new AndGate(43)));
+        m_Gates->push_back(std::shared_ptr<Gate> (new OrGate(45)));
 
         for(size_t i = 0; i < m_Gates->size(); i++)
         {
@@ -55,6 +56,8 @@ namespace bnc
             lampPosition++;
         }
 
+        // First Solution
+        m_Solution->push_back(std::shared_ptr<LevelSolution> (new LevelSolution{lampPosition, bnc::AND}));
         lampPosition++;
         
         for (size_t i = 0; i < secondPart.size(); i++)

@@ -8,10 +8,10 @@ namespace bnc
 {
     enum
     {
-        AND,
-        OR,
-        XOR,
-        NOT
+        AND = 1,
+        OR = 2,
+        XOR = 3,
+        NOT = 4
     };
 
     class Gate

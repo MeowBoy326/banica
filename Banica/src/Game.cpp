@@ -24,7 +24,7 @@ namespace bnc
         m_Data = std::shared_ptr<bnc::RenderData>(new bnc::RenderData);
         m_Player = std::shared_ptr<bnc::Player>( new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel));
 
-        m_LevelGenerator = std::unique_ptr<bnc::LevelGenerator>(new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel, m_Player, &m_Gates, &m_Lamps));
+        m_LevelGenerator = std::unique_ptr<bnc::LevelGenerator>(new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel, m_Player, &m_Gates, &m_Lamps, m_Solutions));
         m_LevelGenerator->SetObjects();
 
         m_Data->levels = &m_Levels;
@@ -70,12 +70,36 @@ namespace bnc
                 m_GridCells[i]->isMovable = true;
             }
         }
+
+        uint32_t completed = 0;
+
+        for (size_t i = 0; i < m_Gates.size(); i++)
+        {
+            for (size_t j = 0; j < m_Solutions.size(); j++)
+            {
+                if(m_Gates[i]->GetCellPosition() == m_Solutions[j]->solutionPosition && m_Gates[i]->GetType() == m_Solutions[j]->gateType)
+                {
+                    completed++;
+                    break;
+                }
+            }
+
+        }
+        
+        if(completed == m_Solutions.size())
+        {
+            ClearLevel();
+            m_CurrentLevel++;
+            m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
+            m_LevelGenerator->SetObjects();
+        }
     }
 
     void Game::ClearLevel()
     {
         m_GridCells.clear();
         m_Gates.clear();
+        m_Solutions.clear();
         m_Lamps.clear();
     }
 

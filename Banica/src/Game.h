@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "Solution.h"
 #include "raylib.h"
 #include <stdint.h>
 #include "Renderer.h"
@@ -36,6 +37,8 @@ namespace bnc
         std::unique_ptr<bnc::InputHandler> m_InputHandler;
 
         std::vector<std::shared_ptr<Gate>> m_Gates;
+
+        std::vector<std::shared_ptr<LevelSolution>> m_Solutions;
 
 
         uint32_t m_CurrentLevel = 0;

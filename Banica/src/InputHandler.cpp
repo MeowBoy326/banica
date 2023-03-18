@@ -24,7 +24,10 @@ namespace bnc
             if(m_Timer >= 12)
             {
                 if(r_Grid[player->GetPlayerPosition() + 1]->isMovable == true)
+                {
                     player->MovePlayerRight();
+                    PlaySound(LoadSound("./Banica/sfx/player-movement.wav"));
+                }
 
                 for (size_t i = 0; i < levels[curretnLevel]->GetGates().size(); i++)
                 {
@@ -37,6 +40,7 @@ namespace bnc
                     {
                         player->MovePlayerRight();
                         r_Gates[i]->MoveGateRight();
+                        PlaySound(LoadSound("./Banica/sfx/push-gate.wav"));
                     }
                 }
 
@@ -65,7 +69,10 @@ namespace bnc
             if(m_Timer >= 12)
             {
                 if(r_Grid[player->GetPlayerPosition() - 1]->isMovable == true)
+                {
                     player->MovePlayerLeft();
+                    PlaySound(LoadSound("./Banica/sfx/player-movement.wav"));
+                }
 
                 for (size_t i = 0; i < r_Gates.size(); i++)
                 {
@@ -77,6 +84,7 @@ namespace bnc
                     {
                         r_Gates[i]->MoveGateLeft();
                         player->MovePlayerLeft();
+                        PlaySound(LoadSound("./Banica/sfx/push-gate.wav"));
                     }
                 }
 
@@ -104,7 +112,10 @@ namespace bnc
             if(m_Timer >= 12)
             {
                 if(r_Grid[player->GetPlayerPosition() - levels[curretnLevel]->GetSizeX()]->isMovable == true)
+                {
                     player->MovePlayerUp();
+                    PlaySound(LoadSound("./Banica/sfx/player-movement.wav"));
+                }
 
                 for (size_t i = 0; i < r_Gates.size(); i++)
                 {
@@ -116,6 +127,7 @@ namespace bnc
                     {
                         r_Gates[i]->MoveGateUp(levels[curretnLevel]->GetSizeX());
                         player->MovePlayerUp();
+                        PlaySound(LoadSound("./Banica/sfx/push-gate.wav"));
                     }
                 }
 
@@ -144,7 +156,10 @@ namespace bnc
             {
 
                 if(r_Grid[player->GetPlayerPosition() + levels[curretnLevel]->GetSizeX()]->isMovable == true)
+                {
                     player->MovePlayerDown();
+                    PlaySound(LoadSound("./Banica/sfx/player-movement.wav"));
+                }
 
                 for (size_t i = 0; i < r_Gates.size(); i++)
                 {
@@ -156,6 +171,7 @@ namespace bnc
                     {
                         r_Gates[i]->MoveGateDown(levels[curretnLevel]->GetSizeX());
                         player->MovePlayerDown();
+                        PlaySound(LoadSound("./Banica/sfx/push-gate.wav"));
                     }
                 }
 

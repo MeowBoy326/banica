@@ -42,6 +42,7 @@ namespace bnc
     void Game::Configs()
     {
         SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+        InitAudioDevice();
     }
 
     void Game::Update()

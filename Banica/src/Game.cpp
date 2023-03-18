@@ -20,7 +20,7 @@ namespace bnc
 
     void Game::VariableInitialization()
     {
-        m_Renderer = std::unique_ptr<bnc::Renderer>(new Renderer);
+        m_Renderer = std::unique_ptr<bnc::Renderer>(new bnc::Renderer);
         m_Data = std::shared_ptr<bnc::RenderData>(new bnc::RenderData);
         m_Player = std::shared_ptr<bnc::Player>( new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel));
 
@@ -29,8 +29,14 @@ namespace bnc
 
         m_Data->levels = &m_Levels;
         m_Data->currentLevel = &m_CurrentLevel;
+        m_Data->particles = &m_Particles;
 
         m_InputHandler = std::unique_ptr<bnc::InputHandler>(new bnc::InputHandler);
+
+        m_ParticleHandler = std::unique_ptr<bnc::ParticleHandler>(new bnc::ParticleHandler());
+
+        m_ParticleNewPosition = m_GridCells[m_Player->GetPlayerPosition()]->position;
+        m_ParticleSize = GetRandomValue(10, 15);
     }
 
     void Game::Configs()
@@ -46,7 +52,7 @@ namespace bnc
             m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
         }
 
-        m_InputHandler->HandleInput(m_Player, m_Levels, m_CurrentLevel);
+        m_InputHandler->HandleInput(m_Player, m_Levels, m_CurrentLevel, m_Particles, m_ParticleNewPosition, m_ParticleSize);
         m_Player->UpdatePlayer();
         
         for (size_t i = 0; i < m_Gates.size(); i++)
@@ -93,12 +99,15 @@ namespace bnc
             m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
             m_LevelGenerator->SetObjects();
         }
+
+        m_ParticleHandler->UpdateParticles(m_GridCells, *m_Player, m_Particles, m_ParticleNewPosition, m_ParticleSize);
     }
 
     void Game::ClearLevel()
     {
         m_GridCells.clear();
         m_Gates.clear();
+        m_Particles.clear();
         m_Solutions.clear();
         m_Lamps.clear();
     }

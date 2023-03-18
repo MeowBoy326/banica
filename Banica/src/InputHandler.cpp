@@ -13,7 +13,7 @@ namespace bnc
 
     }
 
-    void InputHandler::HandleInput(std::shared_ptr<bnc::Player> player, std::vector<std::shared_ptr<Level>>& levels, uint32_t& curretnLevel)
+    void InputHandler::HandleInput(std::shared_ptr<bnc::Player> player, std::vector<std::shared_ptr<Level>>& levels, uint32_t& curretnLevel, std::vector<std::shared_ptr<bnc::Particle>>& particles, Vector2& position, uint32_t& particleSize)
     {
         std::vector<std::shared_ptr<bnc::GridCell> >& r_Grid = levels[curretnLevel]->GetGridCells();
         std::vector<std::shared_ptr<bnc::Gate> >& r_Gates = levels[curretnLevel]->GetGates();
@@ -40,7 +40,22 @@ namespace bnc
                     }
                 }
 
+                
                 m_Timer = 0;
+            }
+
+            //* Particles
+            if(particles.size() == 1 || particles.size() == 0)
+            {
+                for (size_t i = 0; i < 5; i++)
+                {
+                    position.x -= GetRandomValue(0, 10);
+                    position.y += GetRandomValue(0, 60);
+
+                    particles.push_back(std::shared_ptr<bnc::Particle>(new bnc::Particle{position, particleSize}));
+
+                    position = r_Grid[player->GetPlayerPosition()]->position;
+                }
             }
         }
 
@@ -67,6 +82,20 @@ namespace bnc
 
                 m_Timer = 0;
             }
+
+            //* Particles
+            if(particles.size() == 1 || particles.size() == 0)
+            {
+                for (size_t i = 0; i < 10; i++)
+                {
+                    position.x += (GetRandomValue(0, 10)) + 60;
+                    position.y += GetRandomValue(0, 60);
+
+                    particles.push_back(std::shared_ptr<bnc::Particle>(new bnc::Particle{position, particleSize}));
+
+                    position = Vector2({r_Grid[player->GetPlayerPosition()]->position.x + 60, r_Grid[player->GetPlayerPosition()]->position.y});
+                }
+            }
         }
 
         //* UP
@@ -91,6 +120,20 @@ namespace bnc
                 }
 
                 m_Timer = 0;
+            }
+
+            //* Particles
+            if(particles.size() == 1 || particles.size() == 0)
+            {
+                for (size_t i = 0; i < 10; i++)
+                {
+                    position.x += GetRandomValue(0, 60);
+                    position.y += GetRandomValue(0, 10) + 60;
+
+                    particles.push_back(std::shared_ptr<bnc::Particle>(new bnc::Particle{position, particleSize}));
+
+                    position = Vector2({r_Grid[player->GetPlayerPosition()]->position.x, r_Grid[player->GetPlayerPosition()]->position.y + 60});
+                }
             }
         }
 
@@ -117,6 +160,20 @@ namespace bnc
                 }
 
                 m_Timer = 0;
+            }
+
+            // //* Particles
+            if(particles.size() == 1 || particles.size() == 0)
+            {
+                for (size_t i = 0; i < 10; i++)
+                {
+                    position.x += GetRandomValue(0, 60);
+                    position.y += GetRandomValue(0, 10);
+
+                    particles.push_back(std::shared_ptr<bnc::Particle>(new bnc::Particle{position, particleSize}));
+
+                    position = Vector2({r_Grid[player->GetPlayerPosition()]->position.x, r_Grid[player->GetPlayerPosition()]->position.y});
+                }
             }
         }
 

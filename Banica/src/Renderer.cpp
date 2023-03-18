@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "Particle.h"
 
 // #define RAYGUI_IMPLEMENTATION
 // #include "raygui.h"
@@ -23,18 +24,18 @@ namespace bnc
         DrawRectangleLinesEx(Rectangle({float(m_CellsInfo[0]->position.x - m_LineSize), float(m_CellsInfo[0]->position.y - m_LineSize), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeX() * 60 + m_LineSize * 2), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeY() * 60 + m_LineSize * 2)}), m_LineSize, LIGHTGRAY);
 
         for(size_t i = 0; i < m_CellsInfo.size(); i++)
-        {
+        { 
             DrawRectangleLinesEx(Rectangle({m_CellsInfo[i]->position.x, m_CellsInfo[i]->position.y, 60, 60}), m_LineSize, LIGHTGRAY);
         }
     }
 
     void Renderer::RenderPlayer()
     {
-        for(size_t i = 0; i < m_CellsInfo.size(); i++)
+        for(size_t i = 1; i < m_CellsInfo.size(); i++)
         {
             if(m_CellsInfo[i]->titleType == bnc::PLAYER)
             {
-                DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, DARKGREEN);
+                DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, DARKGREEN);   
             }
         }
     }
@@ -108,6 +109,18 @@ namespace bnc
 
     }
 
+    void Renderer::RenderParticles()
+    {
+        std::vector<std::shared_ptr<Particle>>& r_Particles = *m_Data->particles;
+
+
+        for (size_t i = 0; i < r_Particles.size(); i++)
+        {
+            DrawRectangle(r_Particles[i]->pariclePosition.x, r_Particles[i]->pariclePosition.y, r_Particles[i]->particleSize, r_Particles[i]->particleSize, r_Particles[i]->particleColor);
+        }
+        
+    }
+
     void Renderer::Render(std::shared_ptr<bnc::RenderData> data)
     {
         m_Data = data;
@@ -120,6 +133,7 @@ namespace bnc
         RenderPlayer();
         RenderGates();
         RenderLamps();
+        RenderParticles();
 
         DrawFPS(0, 0);
 

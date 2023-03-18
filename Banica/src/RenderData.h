@@ -4,6 +4,7 @@
 #include <vector>
 #include "Level.h"
 #include <memory>
+#include "Particle.h"
 
 namespace bnc
 {
@@ -11,5 +12,6 @@ namespace bnc
     {
         std::vector<std::shared_ptr<Level>>* levels;
         uint32_t* currentLevel;
+        std::vector<std::shared_ptr<Particle>>* particles;
     };
 }

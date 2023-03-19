@@ -1,6 +1,6 @@
 #pragma once
 #include "raylib.h"
-#include "RenderData.h"
+#include "Data.h"
 #include <memory>
 
 namespace bnc

@@ -2,15 +2,15 @@
 
 namespace bnc
 {
-    LevelGenerator::LevelGenerator(std::vector<std::shared_ptr<bnc::Level>>& levels, std::vector<std::shared_ptr<GridCell>>& gridCells, uint32_t& currentLevel, std::shared_ptr<Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps, std::vector<std::shared_ptr<LevelSolution>>& solutions)
+    LevelGenerator::LevelGenerator(std::shared_ptr<LevelGenerationData> levelData)
     {
-        m_LevelOne = std::shared_ptr<Level>(new bnc::LevelOne(&gridCells, player, gates, lamps, solutions));    
-        levels.push_back(m_LevelOne);   
+        m_LevelOne = std::shared_ptr<Level>(new bnc::LevelOne(levelData->gridCells, *levelData->player, levelData->gates, levelData->lamps, *levelData->solutions));    
+        levelData->levels->push_back(m_LevelOne);   
 
-        m_LevelTwo = std::shared_ptr<Level>(new bnc::LevelTwo(&gridCells, player, gates, lamps, solutions));    
-        levels.push_back(m_LevelTwo);   
+        m_LevelTwo = std::shared_ptr<Level>(new bnc::LevelTwo(levelData->gridCells, *levelData->player, levelData->gates, levelData->lamps, *levelData->solutions));    
+        levelData->levels->push_back(m_LevelTwo);   
 
-        GenerateLevel(levels, currentLevel);
+        GenerateLevel(*levelData->levels, *levelData->currentLevel);
     }
 
     LevelGenerator::~LevelGenerator()

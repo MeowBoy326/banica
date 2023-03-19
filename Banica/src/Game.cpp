@@ -15,6 +15,8 @@ namespace bnc
 
     Game::~Game()
     {
+        UnloadSound(m_PlayerMovement);
+        UnloadSound(m_PlayerPushing);
         CloseWindow();
     }
 
@@ -24,7 +26,7 @@ namespace bnc
         m_Data = std::shared_ptr<bnc::RenderData>(new bnc::RenderData);
         m_Player = std::shared_ptr<bnc::Player>( new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel));
 
-        m_LevelGenerator = std::unique_ptr<bnc::LevelGenerator>(new bnc::LevelGenerator(m_Levels, m_GridCells, m_CurrentLevel, m_Player, &m_Gates, &m_Lamps, m_Solutions));
+        m_LevelGenerator = std::unique_ptr<bnc::LevelGenerator>(new bnc::LevelGenerator(std::shared_ptr<LevelGenerationData> (new LevelGenerationData{&m_Levels, &m_GridCells, &m_CurrentLevel, &m_Player, &m_Gates, &m_Lamps, &m_Solutions})));
         m_LevelGenerator->SetObjects();
 
         m_Data->levels = &m_Levels;
@@ -41,6 +43,9 @@ namespace bnc
 
         m_ParticleNewPosition = m_GridCells[m_Player->GetPlayerPosition()]->position;
         m_ParticleSize = GetRandomValue(10, 15);
+
+        m_PlayerMovement  = LoadSound("./Banica/sfx/player-movement.wav");
+        m_PlayerPushing = LoadSound("./Banica/sfx/push-gate.wav");
     }
 
     void Game::Configs()
@@ -57,7 +62,7 @@ namespace bnc
             m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
         }
 
-        m_InputHandler->HandleInput(m_Player, m_Levels, m_CurrentLevel, m_Particles, m_ParticleNewPosition, m_ParticleSize);
+        m_InputHandler->HandleInput(std::shared_ptr<bnc::InputHandlerData>(new InputHandlerData{m_Player, &m_Levels, &m_CurrentLevel, &m_Particles, &m_ParticleNewPosition, &m_ParticleSize, m_PlayerMovement, m_PlayerPushing}));
         m_Player->UpdatePlayer();
         
         for (size_t i = 0; i < m_Gates.size(); i++)

@@ -4,7 +4,6 @@
 #include "raylib.h"
 #include <stdint.h>
 #include "Renderer.h"
-#include "RenderData.h"
 #include "GridCell.h"
 #include "LevelGeneration.h"
 #include "Player.h"
@@ -15,7 +14,7 @@
 #include "Particle.h"
 #include "ParticleHandler.h"
 #include "UIRenderer.h"
-#include "UIData.h"
+#include "Data.h"
 
 namespace bnc
 {
@@ -47,6 +46,9 @@ namespace bnc
         std::vector<std::shared_ptr<bnc::LevelSolution>> m_Solutions;
         std::vector<std::shared_ptr<bnc::Particle>> m_Particles;
         std::unique_ptr<bnc::UIRenderer> m_UIRenderer;
+
+        Sound m_PlayerMovement;
+        Sound m_PlayerPushing;
 
 
         uint32_t m_CurrentLevel = 0;

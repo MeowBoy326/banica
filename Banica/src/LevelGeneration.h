@@ -9,13 +9,14 @@
 #include "Gate.h"
 #include <memory>
 #include "Solution.h"
+#include "Data.h"
 
 namespace bnc
 {
     class LevelGenerator
     {
     public:
-        LevelGenerator(std::vector<std::shared_ptr<bnc::Level>>& levels, std::vector<std::shared_ptr<GridCell>>& gridCells, uint32_t& currentLevel, std::shared_ptr<Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps, std::vector<std::shared_ptr<LevelSolution>>& solutions);
+        LevelGenerator(std::shared_ptr<LevelGenerationData> levelData);
         ~LevelGenerator();
 
         void GenerateLevel(std::vector<std::shared_ptr<Level>>& levels, uint32_t& currentLevel);

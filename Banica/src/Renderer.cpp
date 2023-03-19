@@ -1,8 +1,6 @@
 #include "Renderer.h"
 #include "Particle.h"
 
-// #define RAYGUI_IMPLEMENTATION
-// #include "raygui.h"
 #include <iostream>
 
 namespace bnc
@@ -125,8 +123,6 @@ namespace bnc
     {
         m_Data = data;
 
-        BeginDrawing();
-
         Clear();
 
         RenderGrid();
@@ -136,8 +132,6 @@ namespace bnc
         RenderParticles();
 
         DrawFPS(0, 0);
-
-        EndDrawing();
     }
 
     void Renderer::Clear()

@@ -14,6 +14,8 @@
 #include "Lamp.h"
 #include "Particle.h"
 #include "ParticleHandler.h"
+#include "UIRenderer.h"
+#include "UIData.h"
 
 namespace bnc
 {
@@ -28,6 +30,7 @@ namespace bnc
     private:
         std::unique_ptr<bnc::Renderer> m_Renderer;
         std::shared_ptr<bnc::RenderData> m_Data;
+        std::shared_ptr<bnc::UIData> m_UIData;
         std::shared_ptr<bnc::Player> m_Player;
         std::unique_ptr<bnc::ParticleHandler> m_ParticleHandler;
 
@@ -41,8 +44,9 @@ namespace bnc
 
         std::vector<std::shared_ptr<Gate>> m_Gates;
 
-        std::vector<std::shared_ptr<LevelSolution>> m_Solutions;
+        std::vector<std::shared_ptr<bnc::LevelSolution>> m_Solutions;
         std::vector<std::shared_ptr<bnc::Particle>> m_Particles;
+        std::unique_ptr<bnc::UIRenderer> m_UIRenderer;
 
 
         uint32_t m_CurrentLevel = 0;

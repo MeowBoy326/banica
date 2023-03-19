@@ -31,9 +31,13 @@ namespace bnc
         m_Data->currentLevel = &m_CurrentLevel;
         m_Data->particles = &m_Particles;
 
+
         m_InputHandler = std::unique_ptr<bnc::InputHandler>(new bnc::InputHandler);
 
         m_ParticleHandler = std::unique_ptr<bnc::ParticleHandler>(new bnc::ParticleHandler());
+
+        m_UIRenderer = std::unique_ptr<bnc::UIRenderer>(new bnc::UIRenderer);
+        m_UIData = std::shared_ptr<bnc::UIData>(new bnc::UIData);
 
         m_ParticleNewPosition = m_GridCells[m_Player->GetPlayerPosition()]->position;
         m_ParticleSize = GetRandomValue(10, 15);
@@ -102,6 +106,13 @@ namespace bnc
         }
 
         m_ParticleHandler->UpdateParticles(m_GridCells, *m_Player, m_Particles, m_ParticleNewPosition, m_ParticleSize);
+
+        if(*m_UIData->isResetButtonPressed == true)
+        {
+            ClearLevel();
+            m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
+            m_LevelGenerator->SetObjects();           
+        }
     }
 
     void Game::ClearLevel()
@@ -118,7 +129,12 @@ namespace bnc
         while (!WindowShouldClose())
         {
             Update();
+
+            BeginDrawing();
             m_Renderer->Render(m_Data);
+            m_UIRenderer->RenderUI(m_UIData);
+
+            EndDrawing();
         }
     }
 }

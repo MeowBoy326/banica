@@ -40,7 +40,7 @@ namespace bnc
             for (size_t i = 0; i < particles.size(); i++)
             {
 
-                if(particles[i]->pariclePosition.x < gridCells[player.GetPlayerPosition()]->position.x - 30)
+                if(particles[i]->pariclePosition.x < gridCells[player.GetPlayerPosition() - 1]->position.x + 30)
                 {
                     particles.erase(particles.begin() + i);
                 }
@@ -55,7 +55,7 @@ namespace bnc
             for (size_t i = 0; i < particles.size(); i++)
             {
 
-                if(particles[i]->pariclePosition.x > gridCells[player.GetPlayerPosition()]->position.x + 90)
+                if(particles[i]->pariclePosition.x > gridCells[player.GetPlayerPosition() + 1]->position.x + 30)
                 {
                     particles.erase(particles.begin() + i);
                 }

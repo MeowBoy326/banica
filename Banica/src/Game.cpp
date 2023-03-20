@@ -26,7 +26,7 @@ namespace bnc
         m_Data = std::shared_ptr<bnc::RenderData>(new bnc::RenderData);
         m_Player = std::shared_ptr<bnc::Player>( new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel));
 
-        m_LevelGenerator = std::unique_ptr<bnc::LevelGenerator>(new bnc::LevelGenerator(std::shared_ptr<LevelGenerationData> (new LevelGenerationData{&m_Levels, &m_GridCells, &m_CurrentLevel, &m_Player, &m_Gates, &m_Lamps, &m_Solutions})));
+        m_LevelGenerator = std::unique_ptr<bnc::LevelGenerator>(new bnc::LevelGenerator(std::shared_ptr<LevelGenerationData> (new LevelGenerationData{&m_Levels, &m_GridCells, &m_CurrentLevel, m_Player, &m_Gates, &m_Lamps, &m_Solutions})));
         m_LevelGenerator->SetObjects();
 
         m_Data->levels = &m_Levels;
@@ -46,6 +46,8 @@ namespace bnc
 
         m_PlayerMovement  = LoadSound("./Banica/sfx/player-movement.wav");
         m_PlayerPushing = LoadSound("./Banica/sfx/push-gate.wav");
+        m_ButtonClick = LoadSound("./Banica/sfx/press-button.wav");
+        m_CompleteLevel = LoadSound("./Banica/sfx/complete-level.wav");
     }
 
     void Game::Configs()
@@ -104,6 +106,7 @@ namespace bnc
         
         if(completed == m_Solutions.size())
         {
+            PlaySound(m_CompleteLevel);
             ClearLevel();
             m_CurrentLevel++;
             m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
@@ -114,6 +117,7 @@ namespace bnc
 
         if(*m_UIData->isResetButtonPressed == true)
         {
+            PlaySound(m_ButtonClick);
             ClearLevel();
             m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
             m_LevelGenerator->SetObjects();           

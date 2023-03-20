@@ -38,7 +38,7 @@ namespace bnc
         std::vector<std::shared_ptr<bnc::Level>>* levels;
         std::vector<std::shared_ptr<GridCell>>* gridCells;
         uint32_t* currentLevel;
-        std::shared_ptr<Player>* player;
+        std::shared_ptr<Player> player;
         std::vector<std::shared_ptr<bnc::Gate>>* gates;
         std::vector<std::shared_ptr<bnc::Lamp>>* lamps;
         std::vector<std::shared_ptr<LevelSolution>>* solutions;

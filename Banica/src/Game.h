@@ -49,6 +49,8 @@ namespace bnc
 
         Sound m_PlayerMovement;
         Sound m_PlayerPushing;
+        Sound m_ButtonClick;
+        Sound m_CompleteLevel;
 
 
         uint32_t m_CurrentLevel = 0;

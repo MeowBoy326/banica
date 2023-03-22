@@ -33,7 +33,6 @@ namespace bnc
         m_Data->currentLevel = &m_CurrentLevel;
         m_Data->particles = &m_Particles;
 
-
         m_InputHandler = std::unique_ptr<bnc::InputHandler>(new bnc::InputHandler);
 
         m_ParticleHandler = std::unique_ptr<bnc::ParticleHandler>(new bnc::ParticleHandler());
@@ -48,6 +47,15 @@ namespace bnc
         m_PlayerPushing = LoadSound("./Banica/sfx/push-gate.wav");
         m_ButtonClick = LoadSound("./Banica/sfx/press-button.wav");
         m_CompleteLevel = LoadSound("./Banica/sfx/complete-level.wav");
+
+        m_BloomShader = LoadShader(0, TextFormat("./Banica/shaders/bloom.fs", 330));
+        m_LigthShader = LoadShader(0, TextFormat("./Banica/shaders/light.fs", 330));
+
+        m_SpriteTexture = LoadTexture("./Banica/assets/spritesheet-v2.png");
+
+        m_Data->bloomShader = m_BloomShader;
+        m_Data->spriteTexture = m_SpriteTexture;
+        m_Data->lightShader = m_LigthShader;
     }
 
     void Game::Configs()

@@ -19,11 +19,14 @@ namespace bnc
     {
         m_CellsInfo = m_Data->levels->operator[](*m_Data->currentLevel)->GetGridCells();
 
-        DrawRectangleLinesEx(Rectangle({float(m_CellsInfo[0]->position.x - m_LineSize), float(m_CellsInfo[0]->position.y - m_LineSize), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeX() * 60 + m_LineSize * 2), float(m_Data->levels->operator[](*m_Data->currentLevel)->GetSizeY() * 60 + m_LineSize * 2)}), m_LineSize, LIGHTGRAY);
-
         for(size_t i = 0; i < m_CellsInfo.size(); i++)
         { 
-            DrawRectangleLinesEx(Rectangle({m_CellsInfo[i]->position.x, m_CellsInfo[i]->position.y, 60, 60}), m_LineSize, LIGHTGRAY);
+            DrawTextureRec(
+                m_Data->spriteTexture,
+                Rectangle({0.0f, 0.0f, 60.0f, 60.0f}),
+                m_CellsInfo[i]->position,
+                RAYWHITE
+            );
         }
     }
 
@@ -42,6 +45,8 @@ namespace bnc
     {
         for (size_t i = 0; i < m_CellsInfo.size(); i++)
         {
+            BeginShaderMode(m_Data->lightShader);
+
             if(m_CellsInfo[i]->titleType == bnc::GATE)
             {
                 //* Find the type of the gate and render it accordingly
@@ -57,21 +62,43 @@ namespace bnc
                 switch (temp)
                 {
                 case bnc::AND:
-                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, DARKBLUE);
+                    DrawTextureRec(
+                        m_Data->spriteTexture,
+                        Rectangle({0, 60.0f * 2, 60.0f, 60.0f}),
+                        m_CellsInfo[i]->position,
+                        RAYWHITE
+                    );
                     break;
                 case bnc::OR:
-                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, RED);
+                    DrawTextureRec(
+                        m_Data->spriteTexture,
+                        Rectangle({60.0f, 60.0f * 2, 60.0f, 60.0f}),
+                        m_CellsInfo[i]->position,
+                        RAYWHITE
+                    );
                     break;
                 case bnc::NOT:
-                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, PURPLE);
+                    DrawTextureRec(
+                        m_Data->spriteTexture,
+                        Rectangle({60.0f * 2, 60.0f * 2, 60.0f, 60.0f}),
+                        m_CellsInfo[i]->position,
+                        RAYWHITE
+                    );
                     break;
                 case bnc::XOR:
-                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, YELLOW);
+                    DrawTextureRec(
+                        m_Data->spriteTexture,
+                        Rectangle({60.0f * 3, 60.0f * 2, 60.0f, 60.0f}),
+                        m_CellsInfo[i]->position,
+                        RAYWHITE
+                    );
                     break; 
                 default:
                     break;
                 }
             }
+
+            EndShaderMode();
         }
     }
 
@@ -96,15 +123,56 @@ namespace bnc
             {
                 if(temp == bnc::LAMP_ON)
                 {
-                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, GOLD);
+                    BeginShaderMode(m_Data->bloomShader);
+
+                    DrawTextureRec(
+                        m_Data->spriteTexture,
+                        Rectangle({0, 60.0f, 60.0f, 60.0f}),
+                        m_CellsInfo[i]->position,
+                        RAYWHITE
+                    );
+
+                    EndShaderMode();
                 }
                 else
                 {
-                    DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, DARKGRAY);
+                    DrawTextureRec(
+                        m_Data->spriteTexture,
+                        Rectangle({60.0f, 60.0f, 60.0f, 60.0f}),
+                        m_CellsInfo[i]->position,
+                        RAYWHITE
+                    );
                 }
             }
         }
 
+    }
+
+    void Renderer::GetLampsPosition()
+    {
+        std::vector<std::shared_ptr<Lamp>>& r_lamps = m_Data->levels->operator[](*m_Data->currentLevel)->GetLamps();
+
+        for (size_t i = 0; i < m_CellsInfo.size(); i++)
+        {
+            uint32_t temp; 
+
+            for (size_t j = 0; j < r_lamps.size(); j++)
+            {
+                if(r_lamps[j]->GetPosition() == i)
+                {
+                    temp = r_lamps[j]->GetType(); 
+                }
+            }
+
+            if(m_CellsInfo[i]->titleType == bnc::LAMP)
+            {
+                if(temp == bnc::LAMP_ON)
+                {
+                    m_Ligthcount++;
+                    m_LigthPosition.push_back(Vector2({m_CellsInfo[i]->position.x + 30, GetScreenHeight() - m_CellsInfo[i]->position.y - 30}));
+                }
+            }
+        }
     }
 
     void Renderer::RenderParticles()
@@ -125,13 +193,30 @@ namespace bnc
 
         Clear();
 
+        GetLampsPosition();
+
+        Vector2* arr = m_LigthPosition.data();
+
+        
+        SetShaderValue(m_Data->lightShader, GetShaderLocation(m_Data->lightShader, "numLights"), &m_Ligthcount, SHADER_UNIFORM_INT);
+        SetShaderValueV(m_Data->lightShader, GetShaderLocation(m_Data->lightShader, "lightPositions"), arr, SHADER_UNIFORM_VEC2, m_LigthPosition.size());
+
+        BeginShaderMode(m_Data->lightShader);
+
         RenderGrid();
         RenderPlayer();
-        RenderGates();
         RenderLamps();
+        RenderGates();
         RenderParticles();
 
         DrawFPS(0, 0);
+
+
+        m_Ligthcount = 0;
+        m_LigthPosition.clear();
+
+        EndShaderMode();
+        
     }
 
     void Renderer::Clear()

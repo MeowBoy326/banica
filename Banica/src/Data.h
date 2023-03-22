@@ -14,6 +14,9 @@ namespace bnc
         std::vector<std::shared_ptr<Level>>* levels;
         uint32_t* currentLevel;
         std::vector<std::shared_ptr<Particle>>* particles;
+        Shader bloomShader;
+        Shader lightShader;
+        Texture2D spriteTexture;
     };
 
     struct UIData

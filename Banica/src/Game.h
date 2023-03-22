@@ -52,6 +52,10 @@ namespace bnc
         Sound m_ButtonClick;
         Sound m_CompleteLevel;
 
+        Shader m_BloomShader;
+        Shader m_LigthShader;
+
+        Texture2D m_SpriteTexture;
 
         uint32_t m_CurrentLevel = 0;
 

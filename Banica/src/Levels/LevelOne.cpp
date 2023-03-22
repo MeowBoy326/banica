@@ -25,7 +25,9 @@ namespace bnc
     void LevelOne::SetGates()
     {
         m_Gates->push_back(std::shared_ptr<Gate> (new AndGate(43)));
-        m_Gates->push_back(std::shared_ptr<Gate> (new OrGate(45)));
+        m_Gates->push_back(std::shared_ptr<Gate> (new OrGate(44)));
+        m_Gates->push_back(std::shared_ptr<Gate> (new NotGate(45)));
+        m_Gates->push_back(std::shared_ptr<Gate> (new XorGate(46)));
 
         for(size_t i = 0; i < m_Gates->size(); i++)
         {

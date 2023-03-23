@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <iostream>
+#include <string>
 
 namespace bnc
 {
@@ -43,15 +44,17 @@ namespace bnc
         m_ParticleNewPosition = m_GridCells[m_Player->GetPlayerPosition()]->position;
         m_ParticleSize = GetRandomValue(10, 15);
 
-        m_PlayerMovement  = LoadSound("./Banica/sfx/player-movement.wav");
-        m_PlayerPushing = LoadSound("./Banica/sfx/push-gate.wav");
-        m_ButtonClick = LoadSound("./Banica/sfx/press-button.wav");
-        m_CompleteLevel = LoadSound("./Banica/sfx/complete-level.wav");
+        std::string dir = GetWorkingDirectory();
 
-        m_BloomShader = LoadShader(0, TextFormat("./Banica/shaders/bloom.fs", 330));
-        m_LigthShader = LoadShader(0, TextFormat("./Banica/shaders/light.fs", 330));
+        m_PlayerMovement  = LoadSound((dir + std::string("/sfx/player-movement.wav")).c_str());
+        m_PlayerPushing = LoadSound((dir + std::string("/sfx/push-gate.wav")).c_str());
+        m_ButtonClick = LoadSound((dir + std::string("/sfx/press-button.wav")).c_str());
+        m_CompleteLevel = LoadSound((dir + std::string("/sfx/complete-level.wav")).c_str());
 
-        m_SpriteTexture = LoadTexture("./Banica/assets/spritesheet-v2.png");
+        m_BloomShader = LoadShader(0, TextFormat((dir + std::string("/shaders/bloom.fs")).c_str(), 330));
+        m_LigthShader = LoadShader(0, TextFormat((dir + std::string("/shaders/light.fs")).c_str(), 330));
+
+        m_SpriteTexture = LoadTexture((dir + std::string("/assets/spritesheet-v2.png")).c_str());
 
         m_Data->bloomShader = m_BloomShader;
         m_Data->spriteTexture = m_SpriteTexture;
@@ -123,7 +126,7 @@ namespace bnc
 
         m_ParticleHandler->UpdateParticles(m_GridCells, *m_Player, m_Particles, m_ParticleNewPosition, m_ParticleSize);
 
-        if(*m_UIData->isResetButtonPressed == true)
+        if(m_UIData->isResetButtonPressed != nullptr && *m_UIData->isResetButtonPressed == true)
         {
             PlaySound(m_ButtonClick);
             ClearLevel();

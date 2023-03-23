@@ -21,7 +21,7 @@ namespace bnc
 
     struct UIData
     {
-        bool* isResetButtonPressed;
+        bool* isResetButtonPressed = nullptr;
     };
 
     struct InputHandlerData

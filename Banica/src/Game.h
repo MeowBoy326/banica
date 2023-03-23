@@ -33,7 +33,7 @@ namespace bnc
         std::shared_ptr<bnc::Player> m_Player;
         std::unique_ptr<bnc::ParticleHandler> m_ParticleHandler;
 
-        std::vector<std::shared_ptr<bnc::GridCell>> m_GridCells; 
+        std::vector<std::shared_ptr<bnc::GridCell>> m_GridCells;
         std::unique_ptr<LevelGenerator> m_LevelGenerator;
 
         std::vector<std::shared_ptr<Level>> m_Levels;

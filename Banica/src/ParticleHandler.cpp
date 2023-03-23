@@ -35,24 +35,24 @@ namespace bnc
             movementDirection = bnc::DOWN;
         }
 
-        if(movementDirection == bnc::RIGHT)
+        if(movementDirection == bnc::RIGHT && particles.size() > 0)
         {
-            for (size_t i = 0; i < particles.size(); i++)
+            for (size_t i = 0; i < particles.size() - 1; i++)
             {
 
-                if(particles[i]->pariclePosition.x < gridCells[player.GetPlayerPosition() - 1]->position.x + 30)
+                if (particles[i]->pariclePosition.x < gridCells[player.GetPlayerPosition() - 1]->position.x + 30)
                 {
                     particles.erase(particles.begin() + i);
                 }
 
                 particles[i]->pariclePosition.x = position.x;
-                position.x -= 0.8;
+                position.x -= 1.5f;
             }
         }
 
-        if(movementDirection == bnc::LEFT)
+        if(movementDirection == bnc::LEFT && particles.size() > 0)
         {
-            for (size_t i = 0; i < particles.size(); i++)
+            for (size_t i = 0; i < particles.size() - 1; i++)
             {
 
                 if(particles[i]->pariclePosition.x > gridCells[player.GetPlayerPosition() + 1]->position.x + 30)
@@ -61,13 +61,13 @@ namespace bnc
                 }
 
                 particles[i]->pariclePosition.x = position.x;
-                position.x += 0.8;
+                position.x += 0.8f;
             }
         }
 
-        if(movementDirection == bnc::UP)
+        if(movementDirection == bnc::UP && particles.size() > 0)
         {
-            for (size_t i = 0; i < particles.size(); i++)
+            for (size_t i = 0; i < particles.size() - 1; i++)
             {
 
                 if(particles[i]->pariclePosition.y > gridCells[player.GetPlayerPosition()]->position.y + 90)
@@ -76,23 +76,26 @@ namespace bnc
                 }
 
                 particles[i]->pariclePosition.y = position.y;
-                position.y += 0.8;
+                position.y += 0.8f;
             }
         }
 
-        if(movementDirection == bnc::DOWN)
+        if(movementDirection == bnc::DOWN && particles.size() > 0)
         {
-            for (size_t i = 0; i < particles.size(); i++)
+            for (size_t i = 0; i < particles.size() - 1; i++)
             {
 
-                if(particles[i]->pariclePosition.y < gridCells[player.GetPlayerPosition()]->position.y - 30)
+                if(particles[i]->pariclePosition.y < gridCells[player.GetPlayerPosition() + 1]->position.y - 30)
                 {
                     particles.erase(particles.begin() + i);
                 }
 
                 particles[i]->pariclePosition.y = position.y;
-                position.y -= 0.8;
+                position.y -= 0.8f;
             }
         }
+
+        if (particles.size() == 1)
+          particles.clear();
     }
 }

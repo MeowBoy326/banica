@@ -19,6 +19,9 @@ namespace bnc
     {
         m_CellsInfo = m_Data->levels->operator[](*m_Data->currentLevel)->GetGridCells();
 
+
+        BeginShaderMode(m_Data->lightShader);
+
         for(size_t i = 0; i < m_CellsInfo.size(); i++)
         { 
             DrawTextureRec(
@@ -28,6 +31,7 @@ namespace bnc
                 RAYWHITE
             );
         }
+        EndShaderMode();
     }
 
     void Renderer::RenderPlayer()
@@ -43,9 +47,11 @@ namespace bnc
 
     void Renderer::RenderGates()
     {
+
+        BeginShaderMode(m_Data->lightShader);
+        
         for (size_t i = 0; i < m_CellsInfo.size(); i++)
         {
-            BeginShaderMode(m_Data->lightShader);
 
             if(m_CellsInfo[i]->titleType == bnc::GATE)
             {
@@ -98,8 +104,8 @@ namespace bnc
                 }
             }
 
-            EndShaderMode();
         }
+        EndShaderMode();
     }
 
     void Renderer::RenderLamps()
@@ -154,7 +160,7 @@ namespace bnc
 
         for (size_t i = 0; i < m_CellsInfo.size(); i++)
         {
-            uint32_t temp; 
+            uint32_t temp = 0; 
 
             for (size_t j = 0; j < r_lamps.size(); j++)
             {
@@ -180,11 +186,14 @@ namespace bnc
         std::vector<std::shared_ptr<Particle>>& r_Particles = *m_Data->particles;
 
 
+        BeginShaderMode(m_Data->lightShader);
+
         for (size_t i = 0; i < r_Particles.size(); i++)
         {
             DrawRectangle(r_Particles[i]->pariclePosition.x, r_Particles[i]->pariclePosition.y, r_Particles[i]->particleSize, r_Particles[i]->particleSize, r_Particles[i]->particleColor);
         }
-        
+
+        EndShaderMode();
     }
 
     void Renderer::Render(std::shared_ptr<bnc::RenderData> data)
@@ -192,6 +201,8 @@ namespace bnc
         m_Data = data;
 
         Clear();
+
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), CLITERAL(Color){31, 23, 31, 255});
 
         GetLampsPosition();
 
@@ -201,7 +212,6 @@ namespace bnc
         SetShaderValue(m_Data->lightShader, GetShaderLocation(m_Data->lightShader, "numLights"), &m_Ligthcount, SHADER_UNIFORM_INT);
         SetShaderValueV(m_Data->lightShader, GetShaderLocation(m_Data->lightShader, "lightPositions"), arr, SHADER_UNIFORM_VEC2, m_LigthPosition.size());
 
-        BeginShaderMode(m_Data->lightShader);
 
         RenderGrid();
         RenderPlayer();
@@ -214,9 +224,6 @@ namespace bnc
 
         m_Ligthcount = 0;
         m_LigthPosition.clear();
-
-        EndShaderMode();
-        
     }
 
     void Renderer::Clear()

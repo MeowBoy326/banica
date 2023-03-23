@@ -23,10 +23,10 @@ void main()
         vec2 toLight = normalize(lightPositions[i] - pixelPosition);
         float distanceToLight = distance(lightPositions[i], pixelPosition);
         float attenuation = 1.0 - (distanceToLight / lightRadius);
-        attenuation = max(attenuation, 0.08);
+        attenuation = max(attenuation, 0.1);
         vec3 diffuse = lightColor * lightIntensity * attenuation;
         finalColor += diffuse;
     }
-
-    fragColor = vec4(texelColor.rgb * finalColor, texelColor.a);
+    
+    fragColor = vec4(texelColor.rgb * finalColor, 1.0);
 }

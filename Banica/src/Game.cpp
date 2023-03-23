@@ -63,8 +63,14 @@ namespace bnc
 
     void Game::Configs()
     {
+        std::string dir = GetWorkingDirectory();
+        
         SetConfigFlags(FLAG_WINDOW_RESIZABLE);
         InitAudioDevice();
+
+        #ifdef MAKE
+            ChangeDirectory((std::string(GetWorkingDirectory()) + std::string("/Banica")).c_str());
+        #endif
     }
 
     void Game::Update()
@@ -126,7 +132,7 @@ namespace bnc
 
         m_ParticleHandler->UpdateParticles(m_GridCells, *m_Player, m_Particles, m_ParticleNewPosition, m_ParticleSize);
 
-        if(m_UIData->isResetButtonPressed != nullptr && *m_UIData->isResetButtonPressed == true)
+        if(m_UIData->isResetButtonPressed == true)
         {
             PlaySound(m_ButtonClick);
             ClearLevel();

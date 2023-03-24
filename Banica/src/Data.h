@@ -22,6 +22,7 @@ namespace bnc
     struct UIData
     {
         bool isResetButtonPressed = false;
+        Font mainFont;
     };
 
     struct InputHandlerData

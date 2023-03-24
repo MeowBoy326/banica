@@ -36,13 +36,22 @@ namespace bnc
 
     void Renderer::RenderPlayer()
     {
+
+        BeginShaderMode(m_Data->lightShader);
+
         for(size_t i = 1; i < m_CellsInfo.size(); i++)
         {
             if(m_CellsInfo[i]->titleType == bnc::PLAYER)
             {
-                DrawRectangle(m_CellsInfo[i]->position.x + m_LineSize, m_CellsInfo[i]->position.y + m_LineSize, 60 - m_LineSize * 2, 60 - m_LineSize * 2, DARKGREEN);   
+                DrawTextureRec(
+                        m_Data->spriteTexture,
+                        Rectangle({0, 60.0f * 3, 60.0f, 60.0f}),
+                        m_CellsInfo[i]->position,
+                        RAYWHITE
+                    );
             }
         }
+        EndShaderMode();
     }
 
     void Renderer::RenderGates()

@@ -52,13 +52,16 @@ namespace bnc
         m_CompleteLevel = LoadSound((dir + std::string("/sfx/complete-level.wav")).c_str());
 
         m_BloomShader = LoadShader(0, TextFormat((dir + std::string("/shaders/bloom.fs")).c_str(), 330));
-        m_LigthShader = LoadShader(0, TextFormat((dir + std::string("/shaders/light.fs")).c_str(), 330));
+        m_LightShader = LoadShader(0, TextFormat((dir + std::string("/shaders/light.fs")).c_str(), 330));
 
-        m_SpriteTexture = LoadTexture((dir + std::string("/assets/spritesheet-v2.png")).c_str());
+        m_SpriteTexture = LoadTexture((dir + std::string("/assets/tile-spritesheet.png")).c_str());
+
+        m_MainFont = LoadFont((dir + std::string("/fonts/edit-undo.brk.ttf")).c_str());
 
         m_Data->bloomShader = m_BloomShader;
         m_Data->spriteTexture = m_SpriteTexture;
-        m_Data->lightShader = m_LigthShader;
+        m_Data->lightShader = m_LightShader;
+        m_UIData->mainFont = m_MainFont;
     }
 
     void Game::Configs()

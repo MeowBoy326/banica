@@ -18,7 +18,9 @@ namespace bnc
 
     void UIRenderer::RenderButtons()
     {
+        GuiSetFont(m_UIData->mainFont);
         GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
+
         m_UIData->isResetButtonPressed = GuiButton(Rectangle({20.0f, GetScreenHeight() - 70.0f, 220.0f, 60.0f}), "RESET LEVEL");
     }
 

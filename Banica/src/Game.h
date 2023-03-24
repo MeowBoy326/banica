@@ -53,9 +53,11 @@ namespace bnc
         Sound m_CompleteLevel;
 
         Shader m_BloomShader;
-        Shader m_LigthShader;
+        Shader m_LightShader;
 
         Texture2D m_SpriteTexture;
+
+        Font m_MainFont;
 
         uint32_t m_CurrentLevel = 0;
 

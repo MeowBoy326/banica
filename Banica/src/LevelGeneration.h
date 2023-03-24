@@ -10,6 +10,7 @@
 #include <memory>
 #include "Solution.h"
 #include "Data.h"
+#include <string>
 
 namespace bnc
 {
@@ -26,6 +27,8 @@ namespace bnc
         uint32_t m_Scale = 60;
         uint32_t m_GridCellPositionX = 0;
         uint32_t m_GridCellPositionY = 0;
+
+        std::string* m_Result;
 
         std::shared_ptr<Level> m_LatestLevel;
 

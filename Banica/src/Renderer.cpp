@@ -211,7 +211,7 @@ namespace bnc
 
         Clear();
 
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), CLITERAL(Color){31, 23, 31, 255});
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), CLITERAL(Color){54, 54, 67, 255});
 
         GetLampsPosition();
 

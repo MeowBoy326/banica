@@ -6,6 +6,7 @@
 #include <memory>
 #include "Particle.h"
 #include "Player.h"
+#include <string>
 
 namespace bnc
 {
@@ -22,6 +23,8 @@ namespace bnc
     struct UIData
     {
         bool isResetButtonPressed = false;
+        std::string* p_Result = nullptr;
+        Texture2D spriteTexture;
         Font mainFont;
     };
 
@@ -46,5 +49,6 @@ namespace bnc
         std::vector<std::shared_ptr<bnc::Gate>>* gates;
         std::vector<std::shared_ptr<bnc::Lamp>>* lamps;
         std::vector<std::shared_ptr<LevelSolution>>* solutions;
+        std::string* p_Result = nullptr;
     };
 }

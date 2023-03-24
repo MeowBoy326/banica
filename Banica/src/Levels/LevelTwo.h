@@ -15,6 +15,6 @@ namespace bnc
         ~LevelTwo();
 
         void SetGates();
-        void SetLamps();
+        void SetLamps(std::string& r_Result);
     };
 }

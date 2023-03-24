@@ -24,7 +24,7 @@ namespace bnc
         uint32_t GetSizeY() const;
 
         virtual void SetGates() = 0; 
-        virtual void SetLamps() = 0; 
+        virtual void SetLamps(std::string& r_Result) = 0; 
     protected:
         std::vector<std::shared_ptr<bnc::GridCell>>* m_GridCells;
         std::vector<std::shared_ptr<bnc::Gate>>* m_Gates;

@@ -35,7 +35,7 @@ namespace bnc
         }
     }
 
-    void LevelOne::SetLamps()
+    void LevelOne::SetLamps(std::string& r_Result)
     {
         uint32_t lampPosition = 10;
         uint32_t lampResultPosition = 39;
@@ -43,6 +43,8 @@ namespace bnc
         std::string firstPart = "1011";
         std::string secondPart = "1100";
         std::string result = "1111";
+
+        r_Result = result;
 
         for (size_t i = 0; i < firstPart.size(); i++)
         {
@@ -74,20 +76,6 @@ namespace bnc
             }
 
             lampPosition++;
-        }
-
-        for (size_t i = 0; i < result.size(); i++)
-        {
-            if(result[i] == '1')
-            {
-                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampResultPosition, bnc::LAMP_ON)));
-            }
-            else
-            {
-                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampResultPosition, bnc::LAMP_OFF)));
-            }
-
-            lampResultPosition += m_SizeX;
         }
 
         for(size_t i = 0; i < m_Lamps->size(); i++)

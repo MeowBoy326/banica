@@ -27,7 +27,7 @@ namespace bnc
         m_Data = std::shared_ptr<bnc::RenderData>(new bnc::RenderData);
         m_Player = std::shared_ptr<bnc::Player>( new bnc::Player(&m_GridCells, &m_Levels, &m_CurrentLevel));
 
-        m_LevelGenerator = std::unique_ptr<bnc::LevelGenerator>(new bnc::LevelGenerator(std::shared_ptr<LevelGenerationData> (new LevelGenerationData{&m_Levels, &m_GridCells, &m_CurrentLevel, m_Player, &m_Gates, &m_Lamps, &m_Solutions})));
+        m_LevelGenerator = std::unique_ptr<bnc::LevelGenerator>(new bnc::LevelGenerator(std::shared_ptr<LevelGenerationData> (new LevelGenerationData{&m_Levels, &m_GridCells, &m_CurrentLevel, m_Player, &m_Gates, &m_Lamps, &m_Solutions, &m_Result})));
         m_LevelGenerator->SetObjects();
 
         m_Data->levels = &m_Levels;
@@ -62,6 +62,9 @@ namespace bnc
         m_Data->spriteTexture = m_SpriteTexture;
         m_Data->lightShader = m_LightShader;
         m_UIData->mainFont = m_MainFont;
+        m_UIData->spriteTexture = m_SpriteTexture;
+
+        m_UIData->p_Result = &m_Result;
     }
 
     void Game::Configs()

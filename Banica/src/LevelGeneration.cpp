@@ -4,6 +4,8 @@ namespace bnc
 {
     LevelGenerator::LevelGenerator(std::shared_ptr<LevelGenerationData> levelData)
     {
+        m_Result = levelData->p_Result;
+
         m_LevelOne = std::shared_ptr<Level>(new bnc::LevelOne(levelData->gridCells, levelData->player, levelData->gates, levelData->lamps, *levelData->solutions));    
         levelData->levels->push_back(m_LevelOne);   
 
@@ -22,7 +24,7 @@ namespace bnc
     {
         m_LatestLevel = levels[currentLevel];
 
-        m_GridCellPositionX = (GetScreenWidth() / 2)  - ((levels[currentLevel]->GetSizeX()) * m_Scale) / 2;
+        m_GridCellPositionX = 35;
         m_GridCellPositionY = (GetScreenHeight() / 2)  - ((levels[currentLevel]->GetSizeY()) * m_Scale) / 2;
 
         for(size_t i = 0; i < levels[currentLevel]->GetSizeY(); i++)
@@ -37,17 +39,17 @@ namespace bnc
 
                 m_GridCellPositionX += m_Scale;
             }
-            m_GridCellPositionX = (GetScreenWidth() / 2)  - ((levels[currentLevel]->GetSizeX()) * m_Scale) / 2;
+            m_GridCellPositionX = 35;
             m_GridCellPositionY += m_Scale;
         }
 
-        m_GridCellPositionX = (GetScreenWidth() / 2)  - ((levels[currentLevel]->GetSizeX()) * m_Scale) / 2;
+        m_GridCellPositionX = 35;
         m_GridCellPositionY = (GetScreenHeight() / 2)  - ((levels[currentLevel]->GetSizeY()) * m_Scale) / 2;
     }
 
     void LevelGenerator::SetObjects()
     {
         m_LatestLevel->SetGates();
-        m_LatestLevel->SetLamps();
+        m_LatestLevel->SetLamps(*m_Result);
     }
 }

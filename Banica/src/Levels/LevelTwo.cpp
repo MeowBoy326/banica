@@ -32,7 +32,7 @@ namespace bnc
         }
     }
 
-    void LevelTwo::SetLamps()
+    void LevelTwo::SetLamps(std::string& r_Result)
     {
         m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(15, bnc::LAMP_ON)));
         m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(16, bnc::LAMP_OFF)));

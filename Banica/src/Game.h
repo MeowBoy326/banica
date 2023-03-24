@@ -63,6 +63,8 @@ namespace bnc
 
         Vector2 m_ParticleNewPosition;
         uint32_t m_ParticleSize;
+        
+        std::string m_Result;
 
         void Update();
         void Configs();

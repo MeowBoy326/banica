@@ -17,5 +17,6 @@ namespace bnc
         std::shared_ptr<bnc::UIData> m_UIData;
 
         void RenderButtons();    
+        void RenderResult();
     };
 }

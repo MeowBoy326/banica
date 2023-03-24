@@ -25,9 +25,10 @@ namespace bnc
 
         void Clear();
         void RenderGrid();
-        void RenderPlayer();
-        void RenderGates();
-        void RenderLamps();
+        inline void DrawPlayer(uint32_t index);
+        inline void DrawTile(uint32_t index);
+        void DrawGate(uint32_t index);
+        void DrawLamp(uint32_t index);
         void RenderParticles();
         void GetLampsPosition();
     };

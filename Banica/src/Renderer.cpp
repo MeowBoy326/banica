@@ -24,143 +24,142 @@ namespace bnc
 
         for(size_t i = 0; i < m_CellsInfo.size(); i++)
         { 
+            switch(m_CellsInfo[i]->titleType)
+            {
+                case bnc::PLAYER:
+                    DrawPlayer(i); break;
+
+                case bnc::GATE:
+                    DrawGate(i); break;
+
+                case bnc::LAMP:
+                    DrawLamp(i); break;
+
+                default: 
+                    DrawTile(i); break;
+                    
+            }
+        }
+        EndShaderMode();
+    }
+
+    inline void Renderer::DrawPlayer(uint32_t index)
+    {
+        DrawTextureRec(
+            m_Data->spriteTexture,
+            Rectangle({0, 60.0f * 3, 60.0f, 60.0f}),
+            m_CellsInfo[index]->position,
+            RAYWHITE
+        );
+    }
+
+    inline void Renderer::DrawTile(uint32_t index)
+    {
+        DrawTextureRec(
+            m_Data->spriteTexture,
+            Rectangle({0.0f, 0.0f, 60.0f, 60.0f}),
+            m_CellsInfo[index]->position,
+            RAYWHITE
+        );
+    }
+
+    void Renderer::DrawGate(uint32_t index)
+    {
+
+        //* Find the type of the gate and render it accordingly
+        uint32_t temp; 
+        for (size_t j = 0; j < m_Data->levels->operator[](*m_Data->currentLevel)->GetGates().size(); j++)
+        {
+            if(m_Data->levels->operator[](*m_Data->currentLevel)->GetGates()[j]->GetCellPosition() == index)
+            {
+                temp = m_Data->levels->operator[](*m_Data->currentLevel)->GetGates()[j]->GetType(); 
+            }
+        }
+                
+        switch (temp)
+        {
+        case bnc::AND:
             DrawTextureRec(
                 m_Data->spriteTexture,
-                Rectangle({0.0f, 0.0f, 60.0f, 60.0f}),
-                m_CellsInfo[i]->position,
+                Rectangle({0, 60.0f * 2, 60.0f, 60.0f}),
+                m_CellsInfo[index]->position,
                 RAYWHITE
             );
+            break;
+
+        case bnc::OR:
+            DrawTextureRec(
+                m_Data->spriteTexture,
+                Rectangle({60.0f, 60.0f * 2, 60.0f, 60.0f}),
+                m_CellsInfo[index]->position,
+                RAYWHITE
+            );
+            break;
+
+        case bnc::NOT:
+            DrawTextureRec(
+                m_Data->spriteTexture,
+                Rectangle({60.0f * 2, 60.0f * 2, 60.0f, 60.0f}),
+                m_CellsInfo[index]->position,
+                RAYWHITE
+            );
+            break;
+
+        case bnc::XOR:
+            DrawTextureRec(
+                m_Data->spriteTexture,
+                Rectangle({60.0f * 3, 60.0f * 2, 60.0f, 60.0f}),
+                m_CellsInfo[index]->position,
+                RAYWHITE
+            );
+            break; 
+
+        default:
+            break;
         }
-        EndShaderMode();
     }
 
-    void Renderer::RenderPlayer()
-    {
-
-        BeginShaderMode(m_Data->lightShader);
-
-        for(size_t i = 1; i < m_CellsInfo.size(); i++)
-        {
-            if(m_CellsInfo[i]->titleType == bnc::PLAYER)
-            {
-                DrawTextureRec(
-                        m_Data->spriteTexture,
-                        Rectangle({0, 60.0f * 3, 60.0f, 60.0f}),
-                        m_CellsInfo[i]->position,
-                        RAYWHITE
-                    );
-            }
-        }
-        EndShaderMode();
-    }
-
-    void Renderer::RenderGates()
-    {
-
-        BeginShaderMode(m_Data->lightShader);
-        
-        for (size_t i = 0; i < m_CellsInfo.size(); i++)
-        {
-
-            if(m_CellsInfo[i]->titleType == bnc::GATE)
-            {
-                //* Find the type of the gate and render it accordingly
-                uint32_t temp; 
-                for (size_t j = 0; j < m_Data->levels->operator[](*m_Data->currentLevel)->GetGates().size(); j++)
-                {
-                    if(m_Data->levels->operator[](*m_Data->currentLevel)->GetGates()[j]->GetCellPosition() == i)
-                    {
-                       temp = m_Data->levels->operator[](*m_Data->currentLevel)->GetGates()[j]->GetType(); 
-                    }
-                }
-                
-                switch (temp)
-                {
-                case bnc::AND:
-                    DrawTextureRec(
-                        m_Data->spriteTexture,
-                        Rectangle({0, 60.0f * 2, 60.0f, 60.0f}),
-                        m_CellsInfo[i]->position,
-                        RAYWHITE
-                    );
-                    break;
-                case bnc::OR:
-                    DrawTextureRec(
-                        m_Data->spriteTexture,
-                        Rectangle({60.0f, 60.0f * 2, 60.0f, 60.0f}),
-                        m_CellsInfo[i]->position,
-                        RAYWHITE
-                    );
-                    break;
-                case bnc::NOT:
-                    DrawTextureRec(
-                        m_Data->spriteTexture,
-                        Rectangle({60.0f * 2, 60.0f * 2, 60.0f, 60.0f}),
-                        m_CellsInfo[i]->position,
-                        RAYWHITE
-                    );
-                    break;
-                case bnc::XOR:
-                    DrawTextureRec(
-                        m_Data->spriteTexture,
-                        Rectangle({60.0f * 3, 60.0f * 2, 60.0f, 60.0f}),
-                        m_CellsInfo[i]->position,
-                        RAYWHITE
-                    );
-                    break; 
-                default:
-                    break;
-                }
-            }
-
-        }
-        EndShaderMode();
-    }
-
-    void Renderer::RenderLamps()
+    void Renderer::DrawLamp(uint32_t index)
     {
         std::vector<std::shared_ptr<Lamp>>& r_lamps = m_Data->levels->operator[](*m_Data->currentLevel)->GetLamps();
 
+        uint32_t temp; 
 
-        for (size_t i = 0; i < m_CellsInfo.size(); i++)
+        for (size_t j = 0; j < r_lamps.size(); j++)
         {
-            uint32_t temp; 
-
-            for (size_t j = 0; j < r_lamps.size(); j++)
+            if(r_lamps[j]->GetPosition() == index)
             {
-                if(r_lamps[j]->GetPosition() == i)
-                {
-                    temp = r_lamps[j]->GetType(); 
-                }
-            }
-
-            if(m_CellsInfo[i]->titleType == bnc::LAMP)
-            {
-                if(temp == bnc::LAMP_ON)
-                {
-                    BeginShaderMode(m_Data->bloomShader);
-
-                    DrawTextureRec(
-                        m_Data->spriteTexture,
-                        Rectangle({0, 60.0f, 60.0f, 60.0f}),
-                        m_CellsInfo[i]->position,
-                        RAYWHITE
-                    );
-
-                    EndShaderMode();
-                }
-                else
-                {
-                    DrawTextureRec(
-                        m_Data->spriteTexture,
-                        Rectangle({60.0f, 60.0f, 60.0f, 60.0f}),
-                        m_CellsInfo[i]->position,
-                        RAYWHITE
-                    );
-                }
+                temp = r_lamps[j]->GetType(); 
             }
         }
 
+        if(temp == bnc::LAMP_ON)
+        {
+            BeginShaderMode(m_Data->bloomShader);
+
+            DrawTextureRec(
+                m_Data->spriteTexture,
+                Rectangle({0, 60.0f, 60.0f, 60.0f}),
+                m_CellsInfo[index]->position,
+                RAYWHITE
+            );
+
+            EndShaderMode();
+        }
+        else
+        {
+            EndShaderMode();
+            
+            DrawTextureRec(
+                m_Data->spriteTexture,
+                Rectangle({60.0f, 60.0f, 60.0f, 60.0f}),
+                m_CellsInfo[index]->position,
+                RAYWHITE
+            );
+        }
+
+        
+        BeginShaderMode(m_Data->lightShader);
     }
 
     void Renderer::GetLampsPosition()
@@ -223,9 +222,6 @@ namespace bnc
 
 
         RenderGrid();
-        RenderPlayer();
-        RenderLamps();
-        RenderGates();
         RenderParticles();
 
         DrawFPS(0, 0);

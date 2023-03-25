@@ -1,0 +1,4 @@
+<map id="bnc::LevelGenerator::LevelGenerator" name="bnc::LevelGenerator::LevelGenerator">
+<area shape="rect" id="node1" title="Sets all requared variable and levels." alt="" coords="5,5,143,45"/>
+<area shape="rect" id="node2" href="$classbnc_1_1_level_generator.html#ade43a05f9322d71ccf8708df75a4f8f2" title="Generates the grid for the level." alt="" coords="191,5,328,45"/>
+</map>

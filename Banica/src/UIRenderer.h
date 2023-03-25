@@ -6,6 +6,7 @@
 
 namespace bnc
 {
+
     /// @brief Renders the UI
     class UIRenderer
     {
@@ -25,9 +26,13 @@ namespace bnc
         uint32_t m_PreviousLevel = 0;
 
         /// @brief Renders the buttons
-        void RenderButtons();    
+        void RenderResetButton();
         /// @brief Renders the result on the screen
         void RenderResult();
+
+        void RenderTitle();
+
+        void RenderMenuButtons();
         /// @brief Renders the tutorial
         void RenderTutorial();
     };

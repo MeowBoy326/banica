@@ -11,11 +11,22 @@
 /// @brief This is the namespace that contains everything for the game
 namespace bnc
 {
+
+    enum
+    {
+        MAIN_MENU = 1,
+        OPTIONS = 2,
+        LEVEL_SELECT = 3,
+        TUTORIAL = 4,
+        GAME = 5
+    };
+
     /// @brief This struct stores all the data that needs to be passed to the Renderer in the end of the frame
     struct RenderData
     {
         std::vector<std::shared_ptr<Level>>* levels;
         uint32_t* currentLevel;
+        uint32_t* gameState;
         std::vector<std::shared_ptr<Particle>>* particles;
         Shader bloomShader;
         Shader lightShader;
@@ -28,10 +39,14 @@ namespace bnc
     {
         bool skipTutorial = false;
         bool isResetButtonPressed = false;
+        bool isPlayButtonPressed = false;
+        bool isQuitButtonPressed = false;
         std::string* p_Result = nullptr;
         Texture2D spriteTexture;
         Font mainFont;
         uint32_t* currentLevel;
+        uint32_t* gameState;
+        uint32_t* titleAnimCounter;
         Vector2 m_FirstGatePosition;
     };
 

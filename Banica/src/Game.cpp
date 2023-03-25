@@ -61,9 +61,11 @@ namespace bnc
         m_Data->bloomShader = m_BloomShader;
         m_Data->spriteTexture = m_SpriteTexture;
         m_Data->lightShader = m_LightShader;
+        m_Data->gameState = &m_GameState;
         m_UIData->mainFont = m_MainFont;
         m_UIData->spriteTexture = m_SpriteTexture;
         m_UIData->currentLevel = &m_CurrentLevel;
+        m_UIData->gameState = &m_GameState;
 
         m_UIData->p_Result = &m_Result;
 
@@ -91,77 +93,87 @@ namespace bnc
 
     void Game::Update()
     {
-        if(IsWindowResized())
-        {
-            m_GridCells.clear();
-            m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
-        }
 
-        m_InputHandler->HandleInput(std::shared_ptr<bnc::InputHandlerData>(new InputHandlerData{m_Player, &m_Levels, &m_CurrentLevel, &m_Particles, &m_ParticleNewPosition, &m_ParticleSize, m_PlayerMovement, m_PlayerPushing}));
-        m_Player->UpdatePlayer();
-        
-        for (size_t i = 0; i < m_Gates.size(); i++)
+        if(m_GameState == bnc::TUTORIAL || m_GameState == bnc::GAME)
         {
-            m_Gates[i]->OnUpdate(&m_GridCells);
-        }
 
-        for (size_t i = 0; i < m_Lamps.size(); i++)
-        {
-            m_Lamps[i]->OnUpdate(m_GridCells);
-        }
-        
-        for (size_t i = 0; i < m_GridCells.size(); i++)
-        {
-            if(m_GridCells[i]->titleType != bnc::NONE)
+            if(IsWindowResized())
             {
-                m_GridCells[i]->isMovable = false;
+                m_GridCells.clear();
+                m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
             }
-            else
+
+            m_InputHandler->HandleInput(std::shared_ptr<bnc::InputHandlerData>(new InputHandlerData{m_Player, &m_Levels, &m_CurrentLevel, &m_Particles, &m_ParticleNewPosition, &m_ParticleSize, m_PlayerMovement, m_PlayerPushing}));
+            m_Player->UpdatePlayer();
+            
+            for (size_t i = 0; i < m_Gates.size(); i++)
             {
-                m_GridCells[i]->isMovable = true;
+                m_Gates[i]->OnUpdate(&m_GridCells);
             }
-        }
 
-        uint32_t completed = 0;
-
-        for (size_t i = 0; i < m_Gates.size(); i++)
-        {
-            for (size_t j = 0; j < m_Solutions.size(); j++)
+            for (size_t i = 0; i < m_Lamps.size(); i++)
             {
-                if(m_Gates[i]->GetCellPosition() == m_Solutions[j]->solutionPosition && m_Gates[i]->GetType() == m_Solutions[j]->gateType)
+                m_Lamps[i]->OnUpdate(m_GridCells);
+            }
+            
+            for (size_t i = 0; i < m_GridCells.size(); i++)
+            {
+                if(m_GridCells[i]->titleType != bnc::NONE)
                 {
-                    completed++;
-                    break;
+                    m_GridCells[i]->isMovable = false;
+                }
+                else
+                {
+                    m_GridCells[i]->isMovable = true;
                 }
             }
 
-        }
-        
-        if(completed == m_Solutions.size())
-        {
-            PlaySound(m_CompleteLevel);
-            ClearLevel();
-            m_CurrentLevel++;
-            m_UIData->skipTutorial = false;
-            m_Player->SetPlayerPosition(56);
-            m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
-            m_LevelGenerator->SetObjects();
+            uint32_t completed = 0;
+
+            for (size_t i = 0; i < m_Gates.size(); i++)
+            {
+                for (size_t j = 0; j < m_Solutions.size(); j++)
+                {
+                    if(m_Gates[i]->GetCellPosition() == m_Solutions[j]->solutionPosition && m_Gates[i]->GetType() == m_Solutions[j]->gateType)
+                    {
+                        completed++;
+                        break;
+                    }
+                }
+
+            }
+            
+            if(completed == m_Solutions.size())
+            {
+                PlaySound(m_CompleteLevel);
+                ClearLevel();
+                m_CurrentLevel++;
+                m_UIData->skipTutorial = false;
+                m_Player->SetPlayerPosition(56);
+                m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
+                m_LevelGenerator->SetObjects();
+            }
+
+            m_ParticleHandler->UpdateParticles(m_GridCells, *m_Player, m_Particles, m_ParticleNewPosition, m_ParticleSize);
+
+            if(m_UIData->isResetButtonPressed == true)
+            {
+                PlaySound(m_ButtonClick);
+                ClearLevel();
+                m_Player->SetPlayerPosition(56);
+                m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
+                m_LevelGenerator->SetObjects();           
+            }
+
+            if(IsKeyPressed(KEY_C))
+            {
+                m_UIData->skipTutorial = true;
+            }
         }
 
-        m_ParticleHandler->UpdateParticles(m_GridCells, *m_Player, m_Particles, m_ParticleNewPosition, m_ParticleSize);
-
-        if(m_UIData->isResetButtonPressed == true)
+        if(m_UIData->isPlayButtonPressed)
         {
-            PlaySound(m_ButtonClick);
-            ClearLevel();
-            m_Player->SetPlayerPosition(56);
-            m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
-            m_LevelGenerator->SetObjects();           
-        }
-
-        if(IsKeyPressed(KEY_C))
-        {
-            m_UIData->skipTutorial = true;
+            m_GameState = bnc::TUTORIAL;
         }
     }
 
@@ -176,7 +188,7 @@ namespace bnc
 
     void Game::Run()
     {
-        while (!WindowShouldClose())
+        while (!(m_UIData->isQuitButtonPressed))
         {
             Update();
 

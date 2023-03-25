@@ -210,25 +210,30 @@ namespace bnc
 
         Clear();
 
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), CLITERAL(Color){54, 54, 67, 255});
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), CLITERAL(Color){30, 30, 30, 255});
 
-        GetLampsPosition();
+        if(*m_Data->gameState == bnc::TUTORIAL || *m_Data->gameState == bnc::GAME)
+        {
+            GetLampsPosition();
 
-        Vector2* arr = m_LigthPosition.data();
+            Vector2* arr = m_LigthPosition.data();
 
+            
+            SetShaderValue(m_Data->lightShader, GetShaderLocation(m_Data->lightShader, "numLights"), &m_Ligthcount, SHADER_UNIFORM_INT);
+            SetShaderValueV(m_Data->lightShader, GetShaderLocation(m_Data->lightShader, "lightPositions"), arr, SHADER_UNIFORM_VEC2, m_LigthPosition.size());
+
+
+            RenderGrid();
+            RenderParticles();
+
+
+            m_Ligthcount = 0;
+            m_LigthPosition.clear();
+        }
         
-        SetShaderValue(m_Data->lightShader, GetShaderLocation(m_Data->lightShader, "numLights"), &m_Ligthcount, SHADER_UNIFORM_INT);
-        SetShaderValueV(m_Data->lightShader, GetShaderLocation(m_Data->lightShader, "lightPositions"), arr, SHADER_UNIFORM_VEC2, m_LigthPosition.size());
 
-
-        RenderGrid();
-        RenderParticles();
 
         DrawFPS(0, 0);
-
-
-        m_Ligthcount = 0;
-        m_LigthPosition.clear();
     }
 
     void Renderer::Clear()

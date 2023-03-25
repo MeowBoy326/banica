@@ -67,6 +67,8 @@ namespace bnc
 
         Font m_MainFont;
 
+        uint32_t m_GameState = MAIN_MENU;
+
         uint32_t m_CurrentLevel = 0;
 
         Vector2 m_ParticleNewPosition;

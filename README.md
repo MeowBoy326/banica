@@ -1,6 +1,6 @@
-<h1 align="center"> TEAM BAKLAVA <h1>
+<h1 align="center"> TEAM BANICA <h1>
 
-<div align="center" style="border-radius:50%" ><img src="/assets/darkLogo.png" alt="logo with text banica"> </div>
+<div align="center" ><img src="/assets/banner.png" alt="logo with text banica"> </div>
 
 <div align="center"> 
 
@@ -17,7 +17,7 @@
   - [Collaborators](#collaborators)
 
 ## 🔍 Description <a name="description"></a>
-This is a puzzel game where the puzzels are bitwise equations.
+<p align="center"> This is a puzzel game where the puzzels are bitwise equations </p>
 
 ## 📃 Documentation <a name="docs"></a>
 ### Code & Team Documentation

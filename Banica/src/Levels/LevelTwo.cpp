@@ -1,5 +1,6 @@
 #include "LevelTwo.h"
 #include <memory>
+#include <iostream>
 
 namespace bnc
 {
@@ -10,10 +11,10 @@ namespace bnc
         m_Lamps = lamps;
         m_Solution = &solutions;
         
-        m_SizeX = 15;
-        m_SizeY = 10;
+        m_SizeX = 11;
+        m_SizeY = 11;
 
-        player->SetPlayerPosition(20);
+        player->SetPlayerPosition(56);
     }
 
     LevelTwo::~LevelTwo()
@@ -23,8 +24,7 @@ namespace bnc
 
     void LevelTwo::SetGates()
     {
-        m_Gates->push_back(std::shared_ptr<Gate> (new AndGate(42)));
-        m_Gates->push_back(std::shared_ptr<Gate> (new OrGate(44)));
+        m_Gates->push_back(std::shared_ptr<Gate> (new OrGate(60)));
 
         for(size_t i = 0; i < m_Gates->size(); i++)
         {
@@ -34,13 +34,45 @@ namespace bnc
 
     void LevelTwo::SetLamps(std::string& r_Result)
     {
-        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(15, bnc::LAMP_ON)));
-        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(16, bnc::LAMP_OFF)));
-        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(17, bnc::LAMP_OFF)));
-        m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(18, bnc::LAMP_ON)));
+        uint32_t lampPosition = 12;
 
-        // dummmy solution for testing
-        m_Solution->push_back(std::shared_ptr<LevelSolution> (new LevelSolution{0, bnc::AND}));
+        std::string firstPart = "1010";
+        std::string secondPart = "0101";
+        std::string result = "1111";
+
+        r_Result = result;
+
+        for (size_t i = 0; i < firstPart.size(); i++)
+        {
+            if(firstPart[i] == '1')
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampPosition, bnc::LAMP_ON)));
+            }
+            else
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampPosition, bnc::LAMP_OFF)));
+            }
+
+            lampPosition++;
+        }
+
+        // First Solution
+        m_Solution->push_back(std::shared_ptr<LevelSolution> (new LevelSolution{lampPosition, bnc::OR}));
+        lampPosition++;
+        
+        for (size_t i = 0; i < secondPart.size(); i++)
+        {
+            if(secondPart[i] == '1')
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampPosition, bnc::LAMP_ON)));
+            }
+            else
+            {
+                m_Lamps->push_back(std::shared_ptr<Lamp> (new Lamp(lampPosition, bnc::LAMP_OFF)));
+            }
+
+            lampPosition++;
+        }
 
         for(size_t i = 0; i < m_Lamps->size(); i++)
         {

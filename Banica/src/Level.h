@@ -7,6 +7,7 @@
 #include "Lamp.h"
 #include <vector>
 #include "Solution.h"
+#include <string>
 
 namespace bnc
 {

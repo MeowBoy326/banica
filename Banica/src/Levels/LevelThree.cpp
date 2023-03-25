@@ -1,10 +1,10 @@
-#include "LevelOne.h"
+#include "LevelThree.h"
 #include <memory>
 #include <iostream>
 
 namespace bnc
 {
-    LevelOne::LevelOne(std::vector<std::shared_ptr<bnc::GridCell>>* grid, std::shared_ptr<bnc::Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps, std::vector<std::shared_ptr<LevelSolution>>& solutions)
+    LevelThree::LevelThree(std::vector<std::shared_ptr<bnc::GridCell>>* grid, std::shared_ptr<bnc::Player>& player, std::vector<std::shared_ptr<bnc::Gate>>* gates, std::vector<std::shared_ptr<bnc::Lamp>>* lamps, std::vector<std::shared_ptr<LevelSolution>>& solutions)
     {
         m_GridCells = grid;
         m_Gates = gates;
@@ -13,16 +13,18 @@ namespace bnc
         
         m_SizeX = 11;
         m_SizeY = 11;
+
+        player->SetPlayerPosition(56);
     }
 
-    LevelOne::~LevelOne()
+    LevelThree::~LevelThree()
     {
 
     }
 
-    void LevelOne::SetGates()
+    void LevelThree::SetGates()
     {
-        m_Gates->push_back(std::shared_ptr<Gate> (new AndGate(60)));
+        m_Gates->push_back(std::shared_ptr<Gate> (new XorGate(60)));
 
         for(size_t i = 0; i < m_Gates->size(); i++)
         {
@@ -30,13 +32,13 @@ namespace bnc
         }
     }
 
-    void LevelOne::SetLamps(std::string& r_Result)
+    void LevelThree::SetLamps(std::string& r_Result)
     {
         uint32_t lampPosition = 12;
 
-        std::string firstPart = "1011";
-        std::string secondPart = "1100";
-        std::string result = "1000";
+        std::string firstPart = "1001";
+        std::string secondPart = "0101";
+        std::string result = "1111";
 
         r_Result = result;
 
@@ -55,7 +57,7 @@ namespace bnc
         }
 
         // First Solution
-        m_Solution->push_back(std::shared_ptr<LevelSolution> (new LevelSolution{lampPosition, bnc::AND}));
+        m_Solution->push_back(std::shared_ptr<LevelSolution> (new LevelSolution{lampPosition, bnc::XOR}));
         lampPosition++;
         
         for (size_t i = 0; i < secondPart.size(); i++)

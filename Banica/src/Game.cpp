@@ -63,8 +63,18 @@ namespace bnc
         m_Data->lightShader = m_LightShader;
         m_UIData->mainFont = m_MainFont;
         m_UIData->spriteTexture = m_SpriteTexture;
+        m_UIData->currentLevel = &m_CurrentLevel;
 
         m_UIData->p_Result = &m_Result;
+
+        for (size_t i = 0; i < m_GridCells.size(); i++)
+        {
+            if(m_GridCells[i]->titleType == bnc::GATE)
+            {
+                m_UIData->m_FirstGatePosition = m_GridCells[i]->position;
+            }
+        }
+        
     }
 
     void Game::Configs()
@@ -132,6 +142,8 @@ namespace bnc
             PlaySound(m_CompleteLevel);
             ClearLevel();
             m_CurrentLevel++;
+            m_UIData->skipTutorial = false;
+            m_Player->SetPlayerPosition(56);
             m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
             m_LevelGenerator->SetObjects();
         }
@@ -144,6 +156,11 @@ namespace bnc
             ClearLevel();
             m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
             m_LevelGenerator->SetObjects();           
+        }
+
+        if(IsKeyPressed(KEY_C))
+        {
+            m_UIData->skipTutorial = true;
         }
     }
 

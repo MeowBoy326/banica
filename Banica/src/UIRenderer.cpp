@@ -58,11 +58,33 @@ namespace bnc
         }
     }
 
+    void UIRenderer::RenderTutorial()
+    {
+       if(m_PreviousLevel != *m_UIData->currentLevel)
+       {
+            m_currentText = 0;
+            m_Timer = 120;
+            m_PreviousLevel++;
+       }
+
+        if(!m_UIData->skipTutorial)
+        {
+            bnc::renderTutorial(m_UIData, m_currentText, m_Timer);
+
+            DrawTextEx(m_UIData->mainFont, "PRESS C TO SKIP", Vector2({700.0f, (GetScreenHeight() - 660.0f) / 2}), 16, 2, RAYWHITE);
+        }
+        else
+        {
+            m_currentText = 0;
+        }
+    }
+
     void UIRenderer::RenderUI(std::shared_ptr<bnc::UIData> data)
     {
         m_UIData = data;
 
         RenderButtons();
         RenderResult();
+        RenderTutorial();
     }
 }

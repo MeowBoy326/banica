@@ -22,10 +22,13 @@ namespace bnc
 
     struct UIData
     {
+        bool skipTutorial = false;
         bool isResetButtonPressed = false;
         std::string* p_Result = nullptr;
         Texture2D spriteTexture;
         Font mainFont;
+        uint32_t* currentLevel;
+        Vector2 m_FirstGatePosition;
     };
 
     struct InputHandlerData

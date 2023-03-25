@@ -12,6 +12,12 @@ namespace bnc
         m_LevelTwo = std::shared_ptr<Level>(new bnc::LevelTwo(levelData->gridCells, levelData->player, levelData->gates, levelData->lamps, *levelData->solutions));    
         levelData->levels->push_back(m_LevelTwo);   
 
+        m_LevelThree = std::shared_ptr<Level>(new bnc::LevelThree(levelData->gridCells, levelData->player, levelData->gates, levelData->lamps, *levelData->solutions));    
+        levelData->levels->push_back(m_LevelThree);
+
+        m_LevelFour = std::shared_ptr<Level>(new bnc::LevelFour(levelData->gridCells, levelData->player, levelData->gates, levelData->lamps, *levelData->solutions));    
+        levelData->levels->push_back(m_LevelFour);
+
         GenerateLevel(*levelData->levels, *levelData->currentLevel);
     }
 

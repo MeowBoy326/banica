@@ -6,12 +6,15 @@
 
 namespace bnc
 {
+    /// @brief Renders the UI
     class UIRenderer
     {
     public:
         UIRenderer();
         ~UIRenderer();
 
+        /// @brief Renders the UI
+        /// @param data pointer to the UIData struct
         void RenderUI(std::shared_ptr<bnc::UIData> data);
 
     private:
@@ -21,9 +24,11 @@ namespace bnc
         uint32_t m_Timer = 120;
         uint32_t m_PreviousLevel = 0;
 
-
+        /// @brief Renders the buttons
         void RenderButtons();    
+        /// @brief Renders the result on the screen
         void RenderResult();
+        /// @brief Renders the tutorial
         void RenderTutorial();
     };
 }

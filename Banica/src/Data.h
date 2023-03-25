@@ -8,8 +8,10 @@
 #include "Player.h"
 #include <string>
 
+/// @brief This is the namespace that contains everything for the game
 namespace bnc
 {
+    /// @brief This struct stores all the data that needs to be passed to the Renderer in the end of the frame
     struct RenderData
     {
         std::vector<std::shared_ptr<Level>>* levels;
@@ -20,6 +22,8 @@ namespace bnc
         Texture2D spriteTexture;
     };
 
+
+    /// @brief This struct stores all the data that needs to be passed to the UIRenderer in the end of the frame
     struct UIData
     {
         bool skipTutorial = false;
@@ -31,6 +35,7 @@ namespace bnc
         Vector2 m_FirstGatePosition;
     };
 
+    /// @brief This struct stores all the data that needs to be passed to the InputHandler
     struct InputHandlerData
     {
         std::shared_ptr<bnc::Player> player; 
@@ -43,6 +48,7 @@ namespace bnc
         Sound playerPushing;
     };
 
+    /// @brief This struct stores all the data that needs to be passed to the LevelGenerator
     struct LevelGenerationData
     {
         std::vector<std::shared_ptr<bnc::Level>>* levels;

@@ -18,12 +18,20 @@
 
 namespace bnc
 {
+    /// @brief This is the main class from witch the flow of the game is controlled 
     class Game
     {
     public:
+        /// @brief The constructor initiales the window and calls the member methods Configs() and VariableInitialization()
+        /// @param width This is the width of the window
+        /// @param height This is the height of the window 
+        /// @param title This is the title of the window
+        /// @see Configs() 
+        /// @see VariableInitialization()
         Game(uint32_t width, uint32_t height, const char* title);
         ~Game();
-        
+
+       /// @brief This method runs the game
         void Run();
 
     private:
@@ -65,10 +73,14 @@ namespace bnc
         uint32_t m_ParticleSize;
         
         std::string m_Result;
-
+        
+        /// @brief This method runs every frame and updates all the required variables
         void Update();
+        /// @brief This method sets all configurations for raylib
         void Configs();
+        /// @brief This method run once at the begining of the game
         void VariableInitialization();
+        /// @brief This method clear the level
         void ClearLevel();
     };
 }

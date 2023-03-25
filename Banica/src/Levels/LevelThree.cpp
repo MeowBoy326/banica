@@ -36,9 +36,9 @@ namespace bnc
     {
         uint32_t lampPosition = 12;
 
-        std::string firstPart = "1001";
-        std::string secondPart = "0101";
-        std::string result = "1111";
+        std::string firstPart =     "1001";
+        std::string secondPart =    "0101";
+        std::string result =        "1100";
 
         r_Result = result;
 

@@ -154,6 +154,7 @@ namespace bnc
         {
             PlaySound(m_ButtonClick);
             ClearLevel();
+            m_Player->SetPlayerPosition(56);
             m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
             m_LevelGenerator->SetObjects();           
         }

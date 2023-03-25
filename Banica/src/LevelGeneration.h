@@ -14,12 +14,19 @@
 
 namespace bnc
 {
+    /// @brief This class is responsibly for the level generation
     class LevelGenerator
     {
     public:
+        /// @brief Sets all requared variable and levels
+        /// @param levelData Pointer to a struct of LevelGenerationData
+        /// @see LevelGenerationData
         LevelGenerator(std::shared_ptr<LevelGenerationData> levelData);
         ~LevelGenerator();
 
+        /// @brief Generates the grid for the level
+        /// @param levels Reference to a vector storing all levels
+        /// @param currentLevel Referece to a unsiged int storing the current level
         void GenerateLevel(std::vector<std::shared_ptr<Level>>& levels, uint32_t& currentLevel);
         void SetObjects();
 

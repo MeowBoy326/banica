@@ -108,7 +108,7 @@ namespace bnc
         }
 
         //* UP
-        if((IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) && inputData->player->GetPlayerPosition() > inputData->levels->operator[](*inputData->currentLevel)->GetSizeX())
+        if((IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) && inputData->player->GetPlayerPosition() >= inputData->levels->operator[](*inputData->currentLevel)->GetSizeX())
         {
             if(m_Timer >= 12)
             {
@@ -195,5 +195,6 @@ namespace bnc
         }
 
         m_Timer++;
+
     }
 }

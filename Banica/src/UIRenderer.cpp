@@ -22,7 +22,7 @@ namespace bnc
         GuiSetFont(m_UIData->mainFont);
         GuiSetStyle(DEFAULT, TEXT_SIZE, 30);
 
-        m_UIData->isResetButtonPressed = GuiButton(Rectangle({GetScreenWidth() - 240.0f, GetScreenHeight() - 70.0f, 220.0f, 60.0f}), "RESET LEVEL");
+        m_UIData->isResetButtonPressed = GuiButton(Rectangle({GetScreenWidth() - 240.0f, GetScreenHeight() - 150.0f, 220.0f, 60.0f}), "RESET LEVEL");
     }
 
     void UIRenderer::RenderResult()
@@ -92,7 +92,6 @@ namespace bnc
         GuiSetFont(m_UIData->mainFont);
         GuiSetStyle(DEFAULT, TEXT_SIZE, 50);
         GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, 0xFFFFFFFF);
-        GuiSetStyle(DEFAULT, TEXT_COLOR_FOCUSED, 0x808080FF);
 
         m_UIData->isPlayButtonPressed = GuiLabelButton(Rectangle({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "PLAY", 16, 2).x, (GetScreenHeight() / 2.0f) - 35.0f, MeasureTextEx(m_UIData->mainFont, "PLAY", 16, 2).x, 30.0f}), "PLAY");
 
@@ -102,6 +101,56 @@ namespace bnc
     void UIRenderer::RenderMainMenuBg()
     {
         DrawTexture(m_UIData->mainMenuBg, 0, 0, RAYWHITE);
+    }
+
+    void UIRenderer::RenderLevelSelect()
+    {
+        DrawTextEx(m_UIData->mainFont, "LEVELS", Vector2({(GetScreenWidth()/2.0f)-(MeasureTextEx(m_UIData->mainFont, "LEVELS", 42, 2).x/2.0f), GetScreenHeight()/30.0f}), 42, 2, RAYWHITE);
+
+        GuiSetFont(m_UIData->mainFont);
+        GuiSetStyle(DEFAULT, TEXT_SIZE, 50);
+        
+        GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, 0xFFFFFFFF);
+        GuiSetStyle(DEFAULT, TEXT_COLOR_FOCUSED, 0xFFFFFFFF);
+        GuiSetStyle(DEFAULT, TEXT_COLOR_PRESSED, 0xFFFFFFFF);
+        GuiSetStyle(DEFAULT, BORDER_WIDTH, 0);
+
+        for(uint32_t i = 0; i < 10; i++)
+        {
+            GuiSetStyle(DEFAULT, BASE_COLOR_NORMAL, 0x2A2A47FF);
+            GuiSetStyle(DEFAULT, BASE_COLOR_FOCUSED, 0x424470FF);
+            GuiSetStyle(DEFAULT, BASE_COLOR_PRESSED, 0x9FA0C6FF);
+            // if(m_UIData->levels->operator[](*m_UIData->currentLevel)->isCompleted)
+            // {
+            //     GuiSetStyle(DEFAULT, BASE_COLOR_NORMAL, 0x2A4732FF);
+            //     GuiSetStyle(DEFAULT, BASE_COLOR_FOCUSED, 0x42704FFF);
+            //     GuiSetStyle(DEFAULT, BASE_COLOR_PRESSED, 0x9FC6AAFF);
+            // }
+            // else
+            // {
+            //     GuiSetStyle(DEFAULT, BASE_COLOR_NORMAL, 0x2A2A47FF);
+            //     GuiSetStyle(DEFAULT, BASE_COLOR_FOCUSED, 0x424470FF);
+            //     GuiSetStyle(DEFAULT, BASE_COLOR_PRESSED, 0x9FA0C6FF);
+            // }
+            
+            if(i < 5)
+            {
+                m_UIData->levelSelected[i] = GuiButton(Rectangle({GetScreenWidth()/2.0f - (80*2.5f) + (80*i), GetScreenHeight()/3.5f, 60.0f, 60.0f}), TextFormat("%d", i+1));
+            }
+            else
+            {
+                m_UIData->levelSelected[i] = GuiButton(Rectangle({GetScreenWidth()/2.0f - (80*2.5f) + (80*(i-5)), GetScreenHeight()/3.5f + 100.0f, 60.0f, 60.0f}), TextFormat("%d", i+1));
+            }
+        }
+    }
+
+    void UIRenderer::RenderBackButton()
+    {
+
+        GuiSetFont(m_UIData->mainFont);
+        GuiSetStyle(DEFAULT, TEXT_SIZE, 50);
+
+        m_UIData->isBackButtonPressed = GuiButton(Rectangle({GetScreenWidth() - 240.0f, GetScreenHeight() - 70.0f, 220.0f, 60.0f}), "BACK");
     }
 
     void UIRenderer::RenderUI(std::shared_ptr<bnc::UIData> data)
@@ -118,18 +167,25 @@ namespace bnc
                 break;
 
             case bnc::OPTIONS:
+                RenderMainMenuBg();
+                RenderTitle();
+                RenderMenuButtons();
                 break;
 
             case bnc::LEVEL_SELECT:
+                RenderLevelSelect();
+                RenderBackButton();
                 break;
 
             case bnc::TUTORIAL:
                 RenderTutorial();
+                RenderBackButton();
                 RenderResult();
                 break;
 
             case bnc::GAME:
                 RenderResetButton();
+                RenderBackButton();
                 RenderResult();
                 break;
         }

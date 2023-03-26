@@ -41,6 +41,9 @@ namespace bnc
         bool isResetButtonPressed = false;
         bool isPlayButtonPressed = false;
         bool isQuitButtonPressed = false;
+        bool isBackButtonPressed = false;
+        bool levelSelected[10];
+        std::vector<std::shared_ptr<Level>>* levels;
         std::string* p_Result = nullptr;
         Texture2D spriteTexture;
         Font mainFont;
@@ -69,7 +72,7 @@ namespace bnc
     {
         std::vector<std::shared_ptr<bnc::Level>>* levels;
         std::vector<std::shared_ptr<GridCell>>* gridCells;
-        uint32_t* currentLevel;
+        uint32_t* currentLevel = nullptr;
         std::shared_ptr<Player> player;
         std::vector<std::shared_ptr<bnc::Gate>>* gates;
         std::vector<std::shared_ptr<bnc::Lamp>>* lamps;

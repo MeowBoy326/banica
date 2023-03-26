@@ -39,11 +39,14 @@ namespace bnc
         /// @brief Setter for the lamp
         /// @param r_Result A std::string storing the result of the Level
         virtual void SetLamps(std::string& r_Result) = 0; 
+        
+        bool isCompleted = false;
     protected:
         std::vector<std::shared_ptr<bnc::GridCell>>* m_GridCells;
         std::vector<std::shared_ptr<bnc::Gate>>* m_Gates;
         std::vector<std::shared_ptr<bnc::Lamp>>* m_Lamps;
         std::vector<std::shared_ptr<bnc::LevelSolution>>* m_Solution;
+
 
         uint32_t m_SizeX;
         uint32_t m_SizeY;

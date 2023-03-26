@@ -43,5 +43,9 @@ namespace bnc
         std::shared_ptr<Level> m_LevelTwo;
         std::shared_ptr<Level> m_LevelThree;
         std::shared_ptr<Level> m_LevelFour;
+        std::shared_ptr<Level> m_LevelFive;
+        std::shared_ptr<Level> m_LevelSix;
+        std::shared_ptr<Level> m_LevelSeven;
+        std::shared_ptr<Level> m_LevelEight;
     };
 }

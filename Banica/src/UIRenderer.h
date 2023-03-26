@@ -34,6 +34,8 @@ namespace bnc
         
         void RenderMainMenuBg();
 
+        void RenderSelectMenuBg();
+
         void RenderMenuButtons();
 
         void RenderBackButton();

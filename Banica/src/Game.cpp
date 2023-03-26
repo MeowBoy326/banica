@@ -66,6 +66,7 @@ namespace bnc
 
         m_SpriteTexture = LoadTexture((dir + std::string("/assets/tile-spritesheet.png")).c_str());
         m_MainMenuBg = LoadTexture((dir + std::string("/assets/main-menu-bg.png")).c_str());
+        m_LevelSelectBg = LoadTexture((dir + std::string("/assets/level-select-bg.png")).c_str());
 
         m_MainFont = LoadFont((dir + std::string("/fonts/edit-undo.brk.ttf")).c_str());
 
@@ -79,6 +80,7 @@ namespace bnc
         m_UIData->currentLevel = &m_CurrentLevel;
         m_UIData->gameState = &m_GameState;
         m_UIData->mainMenuBg = m_MainMenuBg;
+        m_UIData->LevelSelectMenuBg = m_LevelSelectBg;
 
         m_UIData->p_Result = &m_Result;
 
@@ -153,7 +155,25 @@ namespace bnc
                 PlaySound(m_CompleteLevel);
                 m_Levels[m_CurrentLevel]->isCompleted = true;
                 ClearLevel();
-                m_GameState = LEVEL_SELECT;
+                if(m_GameState == GAME)
+                {
+                    m_GameState = LEVEL_SELECT;
+                }
+                else
+                {
+                    if(m_CurrentLevel == 3)
+                    {
+                        m_GameState = LEVEL_SELECT;
+                    }
+                    else
+                    {
+                        m_CurrentLevel++;
+                        m_UIData->skipTutorial = false;
+                        m_Player->SetPlayerPosition(56);
+                        m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
+                        m_LevelGenerator->SetObjects();
+                    }
+                }
             }
 
             m_ParticleHandler->UpdateParticles(m_GridCells, *m_Player, m_Particles, m_ParticleNewPosition, m_ParticleSize);
@@ -178,9 +198,16 @@ namespace bnc
             {
                 if(m_UIData->levelSelected[i] == true)
                 {
+                    PlaySound(m_ButtonClick);
                     if(i == 0)
                     {
                         m_GameState = bnc::TUTORIAL;
+                        m_CurrentLevel = 0;
+
+                        ClearLevel();
+                        m_LevelGenerator->GenerateLevel(m_Levels, m_CurrentLevel);
+                        m_LevelGenerator->SetObjects();
+
                     }
                     else
                     {
@@ -199,6 +226,7 @@ namespace bnc
             if(m_UIData->isPlayButtonPressed)
             {
                 m_GameState = bnc::LEVEL_SELECT;
+                PlaySound(m_ButtonClick);
             }
         }
 
@@ -214,6 +242,7 @@ namespace bnc
                     m_GameState = LEVEL_SELECT;
                     break;
             }
+            PlaySound(m_ButtonClick);
         }
         m_UIData->isBackButtonPressed = false;
     }

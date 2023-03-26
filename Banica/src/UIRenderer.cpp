@@ -31,7 +31,7 @@ namespace bnc
 
         DrawTextEx(m_UIData->mainFont, "RESULT",
          Vector2({position.x + 60, position.y - 60}), 
-         36, 2, RAYWHITE);
+         36, 2, WHITE);
 
         for(size_t i = 0; i < m_UIData->p_Result->size(); i++)
         {
@@ -41,7 +41,7 @@ namespace bnc
                     m_UIData->spriteTexture,
                     Rectangle({0, 60.0f, 60.0f, 60.0f}),
                     position,
-                    RAYWHITE
+                    WHITE
                 );
             }
             else
@@ -50,7 +50,7 @@ namespace bnc
                     m_UIData->spriteTexture,
                     Rectangle({60.0f, 60.0f, 60.0f, 60.0f}),
                     position,
-                    RAYWHITE
+                    WHITE
                 );
             }
 
@@ -71,7 +71,7 @@ namespace bnc
         {
             bnc::renderTutorial(m_UIData, m_currentText, m_Timer);
 
-            DrawTextEx(m_UIData->mainFont, "PRESS C TO SKIP", Vector2({700.0f, (GetScreenHeight() - 660.0f) / 2}), 16, 2, RAYWHITE);
+            DrawTextEx(m_UIData->mainFont, "PRESS C TO SKIP", Vector2({700.0f, (GetScreenHeight() - 660.0f) / 2.0f}), 16, 2, WHITE);
         }
         else
         {
@@ -81,9 +81,9 @@ namespace bnc
 
     void UIRenderer::RenderTitle()
     {
-        DrawTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", Vector2({(GetScreenWidth() / 2.0f) + 2.0f - MeasureTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", 16, 2).x, GetScreenHeight() / 5.0f + 2.0f}), 42, 2, BLACK);
+        DrawTextEx(m_UIData->mainFont, "BANICA", Vector2({(GetScreenWidth() / 2.0f) + 2.0f - MeasureTextEx(m_UIData->mainFont, "BANICA", 50, 2).x / 2.0f, GetScreenHeight() / 5.0f + 2.0f}), 50, 2, BLACK);
 
-        DrawTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", Vector2({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", 16, 2).x, GetScreenHeight() / 5.0f}), 42, 2, RAYWHITE);
+        DrawTextEx(m_UIData->mainFont, "BANICA", Vector2({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "BANICA", 50, 2).x / 2.0f, GetScreenHeight() / 5.0f}), 50, 2, WHITE);
         
     }
 
@@ -92,20 +92,27 @@ namespace bnc
         GuiSetFont(m_UIData->mainFont);
         GuiSetStyle(DEFAULT, TEXT_SIZE, 50);
         GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, 0xFFFFFFFF);
+        GuiSetStyle(DEFAULT, TEXT_COLOR_FOCUSED, 0xA6A6A6FF);
+        GuiSetStyle(DEFAULT, TEXT_COLOR_PRESSED, 0x666666FF);
 
-        m_UIData->isPlayButtonPressed = GuiLabelButton(Rectangle({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "PLAY", 16, 2).x, (GetScreenHeight() / 2.0f) - 35.0f, MeasureTextEx(m_UIData->mainFont, "PLAY", 16, 2).x, 30.0f}), "PLAY");
+        m_UIData->isPlayButtonPressed = GuiLabelButton(Rectangle({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "PLAY", 50, 2).x / 2.0f, (GetScreenHeight() / 2.0f) - 35.0f, MeasureTextEx(m_UIData->mainFont, "PLAY", 50, 2).x, 30.0f}), "PLAY");
 
-        m_UIData->isQuitButtonPressed = GuiLabelButton(Rectangle({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "QUIT", 16, 2).x, (GetScreenHeight() / 2.0f + 55.0f) - 35.0f, MeasureTextEx(m_UIData->mainFont, "QUIT", 16, 2).x, 30.0f}), "QUIT");
+        m_UIData->isQuitButtonPressed = GuiLabelButton(Rectangle({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "QUIT", 50, 2).x / 2.0f, (GetScreenHeight() / 2.0f + 55.0f) - 35.0f, MeasureTextEx(m_UIData->mainFont, "QUIT", 50, 2).x, 30.0f}), "QUIT");
     }
 
     void UIRenderer::RenderMainMenuBg()
     {
-        DrawTexture(m_UIData->mainMenuBg, 0, 0, RAYWHITE);
+        DrawTexture(m_UIData->mainMenuBg, 0, 0, WHITE);
+    }
+
+    void UIRenderer::RenderSelectMenuBg()
+    {
+        DrawTexture(m_UIData->LevelSelectMenuBg, 0, 0, WHITE);
     }
 
     void UIRenderer::RenderLevelSelect()
     {
-        DrawTextEx(m_UIData->mainFont, "LEVELS", Vector2({(GetScreenWidth()/2.0f)-(MeasureTextEx(m_UIData->mainFont, "LEVELS", 42, 2).x/2.0f), GetScreenHeight()/30.0f}), 42, 2, RAYWHITE);
+        DrawTextEx(m_UIData->mainFont, "LEVELS", Vector2({(GetScreenWidth()/2.0f)-(MeasureTextEx(m_UIData->mainFont, "LEVELS", 42, 2).x/2.0f), GetScreenHeight()/30.0f}), 42, 2, WHITE);
 
         GuiSetFont(m_UIData->mainFont);
         GuiSetStyle(DEFAULT, TEXT_SIZE, 50);
@@ -115,7 +122,7 @@ namespace bnc
         GuiSetStyle(DEFAULT, TEXT_COLOR_PRESSED, 0xFFFFFFFF);
         GuiSetStyle(DEFAULT, BORDER_WIDTH, 0);
 
-        for(uint32_t i = 0; i < 10; i++)
+        for(uint32_t i = 0; i < 8; i++)
         {
             GuiSetStyle(DEFAULT, BASE_COLOR_NORMAL, 0x2A2A47FF);
             GuiSetStyle(DEFAULT, BASE_COLOR_FOCUSED, 0x424470FF);
@@ -133,13 +140,13 @@ namespace bnc
             //     GuiSetStyle(DEFAULT, BASE_COLOR_PRESSED, 0x9FA0C6FF);
             // }
             
-            if(i < 5)
+            if(i < 4)
             {
-                m_UIData->levelSelected[i] = GuiButton(Rectangle({GetScreenWidth()/2.0f - (80*2.5f) + (80*i), GetScreenHeight()/3.5f, 60.0f, 60.0f}), TextFormat("%d", i+1));
+                m_UIData->levelSelected[i] = GuiButton(Rectangle({GetScreenWidth()/2.0f - (80*2.0f) + (80*i), GetScreenHeight()/3.5f, 60.0f, 60.0f}), TextFormat("%d", i+1));
             }
             else
             {
-                m_UIData->levelSelected[i] = GuiButton(Rectangle({GetScreenWidth()/2.0f - (80*2.5f) + (80*(i-5)), GetScreenHeight()/3.5f + 100.0f, 60.0f, 60.0f}), TextFormat("%d", i+1));
+                m_UIData->levelSelected[i] = GuiButton(Rectangle({GetScreenWidth()/2.0f - (80*2.0f) + (80*(i-4)), GetScreenHeight()/3.5f + 100.0f, 60.0f, 60.0f}), TextFormat("%d", i+1));
             }
         }
     }
@@ -173,6 +180,7 @@ namespace bnc
                 break;
 
             case bnc::LEVEL_SELECT:
+                RenderSelectMenuBg();
                 RenderLevelSelect();
                 RenderBackButton();
                 break;

@@ -48,6 +48,7 @@ namespace bnc
         uint32_t* gameState;
         uint32_t* titleAnimCounter;
         Vector2 m_FirstGatePosition;
+        Texture2D mainMenuBg;
     };
 
     /// @brief This struct stores all the data that needs to be passed to the InputHandler

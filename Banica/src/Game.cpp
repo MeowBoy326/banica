@@ -18,6 +18,16 @@ namespace bnc
     {
         UnloadSound(m_PlayerMovement);
         UnloadSound(m_PlayerPushing);
+        UnloadSound(m_ButtonClick);
+        UnloadSound(m_CompleteLevel);
+
+        UnloadTexture(m_MainMenuBg);
+        UnloadTexture(m_SpriteTexture);
+        UnloadFont(m_MainFont);
+
+        UnloadShader(m_BloomShader);
+        UnloadShader(m_LightShader);
+
         CloseWindow();
     }
 
@@ -55,6 +65,7 @@ namespace bnc
         m_LightShader = LoadShader(0, TextFormat((dir + std::string("/shaders/light.fs")).c_str(), 330));
 
         m_SpriteTexture = LoadTexture((dir + std::string("/assets/tile-spritesheet.png")).c_str());
+        m_MainMenuBg = LoadTexture((dir + std::string("/assets/main-menu-bg.png")).c_str());
 
         m_MainFont = LoadFont((dir + std::string("/fonts/edit-undo.brk.ttf")).c_str());
 
@@ -66,6 +77,7 @@ namespace bnc
         m_UIData->spriteTexture = m_SpriteTexture;
         m_UIData->currentLevel = &m_CurrentLevel;
         m_UIData->gameState = &m_GameState;
+        m_UIData->mainMenuBg = m_MainMenuBg;
 
         m_UIData->p_Result = &m_Result;
 
@@ -82,8 +94,7 @@ namespace bnc
     void Game::Configs()
     {
         std::string dir = GetWorkingDirectory();
-        
-        SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+
         InitAudioDevice();
 
         #ifdef MAKE

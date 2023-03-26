@@ -81,26 +81,38 @@ namespace bnc
 
     void UIRenderer::RenderTitle()
     {
-        DrawTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", Vector2({GetScreenWidth()/29.0f, GetScreenHeight()/23.0f}), 42, 2, BLACK);
-        DrawTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", Vector2({GetScreenWidth()/30.0f, GetScreenHeight()/25.0f}), 42, 2, RAYWHITE);
+        DrawTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", Vector2({(GetScreenWidth() / 2.0f) + 2.0f - MeasureTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", 16, 2).x, GetScreenHeight() / 5.0f + 2.0f}), 42, 2, BLACK);
+
+        DrawTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", Vector2({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "PLACEHOLDER TEXT", 16, 2).x, GetScreenHeight() / 5.0f}), 42, 2, RAYWHITE);
+        
     }
 
     void UIRenderer::RenderMenuButtons()
     {
         GuiSetFont(m_UIData->mainFont);
         GuiSetStyle(DEFAULT, TEXT_SIZE, 50);
+        GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, 0xFFFFFFFF);
+        GuiSetStyle(DEFAULT, TEXT_COLOR_FOCUSED, 0x808080FF);
 
-        m_UIData->isPlayButtonPressed = GuiLabelButton(Rectangle({GetScreenWidth()/30.0f, GetScreenHeight()/2.7f, MeasureTextEx(m_UIData->mainFont, "PLAY", 16, 2).x, 30.0f}), "PLAY");
-        m_UIData->isQuitButtonPressed = GuiLabelButton(Rectangle({GetScreenWidth()/30.0f, GetScreenHeight()/1.6f, MeasureTextEx(m_UIData->mainFont, "QUIT", 16, 2).x, 30.0f}), "QUIT");
+        m_UIData->isPlayButtonPressed = GuiLabelButton(Rectangle({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "PLAY", 16, 2).x, (GetScreenHeight() / 2.0f) - 35.0f, MeasureTextEx(m_UIData->mainFont, "PLAY", 16, 2).x, 30.0f}), "PLAY");
+
+        m_UIData->isQuitButtonPressed = GuiLabelButton(Rectangle({(GetScreenWidth() / 2.0f) - MeasureTextEx(m_UIData->mainFont, "QUIT", 16, 2).x, (GetScreenHeight() / 2.0f + 55.0f) - 35.0f, MeasureTextEx(m_UIData->mainFont, "QUIT", 16, 2).x, 30.0f}), "QUIT");
+    }
+
+    void UIRenderer::RenderMainMenuBg()
+    {
+        DrawTexture(m_UIData->mainMenuBg, 0, 0, RAYWHITE);
     }
 
     void UIRenderer::RenderUI(std::shared_ptr<bnc::UIData> data)
     {
+        
         m_UIData = data;
 
         switch(*m_UIData->gameState)
         {
             case bnc::MAIN_MENU:
+                RenderMainMenuBg();
                 RenderTitle();
                 RenderMenuButtons();
                 break;

@@ -64,6 +64,8 @@ namespace bnc
         Shader m_LightShader;
 
         Texture2D m_SpriteTexture;
+        Texture2D m_MainMenuBg;
+        Texture2D m_LevelSelectBg;
 
         Font m_MainFont;
 

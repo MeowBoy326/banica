@@ -31,6 +31,8 @@ namespace bnc
         void RenderResult();
 
         void RenderTitle();
+        
+        void RenderMainMenuBg();
 
         void RenderMenuButtons();
         /// @brief Renders the tutorial

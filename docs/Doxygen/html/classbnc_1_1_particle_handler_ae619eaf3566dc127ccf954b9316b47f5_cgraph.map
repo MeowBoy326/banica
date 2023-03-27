@@ -1,0 +1,4 @@
+<map id="bnc::ParticleHandler::UpdateParticles" name="bnc::ParticleHandler::UpdateParticles">
+<area shape="rect" id="node1" title="Runs every frame updating the particles." alt="" coords="5,5,144,45"/>
+<area shape="rect" id="node2" href="$classbnc_1_1_player.html#a0837afecee36fa038a3e0cdccf010999" title="Getter for the player position on the grid." alt="" coords="192,13,393,38"/>
+</map>

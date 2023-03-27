@@ -42,16 +42,24 @@ project "Banica"
 
     postbuildcommands
     {
-        ("{COPY} ../vendor/raylib/lib/raylib.dll ../bin/" .. outputdir .. "/2223-9th-grade-sprint-math-games")
+        ("{COPY} ../vendor/raylib/lib/raylib.dll ../bin/" .. outputdir .. "/Banica")
     }
+    
     
     cppdialect "C++20"
     staticruntime "On"
     systemversion "latest"
+
+    filter "action:vs*"
+      defines "VS"
+
+    filter "action:gmake*"
+      defines "MAKE"
     
     filter "configurations:Debug"
+      defines "BNC_DEBUG"
       symbols "On"
     
     filter "configurations:Release"
-      defines "BN_BUILD"
+      defines "BNC_BUILD"
       optimize "On"

@@ -1,0 +1,4 @@
+<map id="bnc::NotGate" name="bnc::NotGate">
+<area shape="rect" id="node1" title=" " alt="" coords="5,79,104,104"/>
+<area shape="rect" id="node2" href="$classbnc_1_1_gate.html" title="This is the base Gate class it is meant to be inherited NOT initialized directly." alt="" coords="15,5,94,31"/>
+</map>

@@ -21,15 +21,17 @@
 
 ## 📃 Documentation <a name="docs"></a>
 ### Code & Team Documentation
-[Code Documentation]()
+[Code Documentation](https://banica-docs.netlify.app/)
 
-[Team Documentation]()
+[Team Documentation](https://github.com/codingburgas/banica/raw/docs/docs/Banica%20-%20Documentation.docx)
 
 ### QA Documentation
-[QA Documentation]()
+[QA Documentation](https://github.com/codingburgas/banica/raw/docs/docs/Banica%20-%20QA%20Documentation.xlsx)
+  
+[Test Plan](https://github.com//codingburgas/banica/raw/docs/docs/Banica%20-%20Test%20plan.docx)
 
 ### Presentation
-[Presentation]()
+[Presentation](https://github.com/codingburgas/banica/raw/docs/docs/Banica%20-%20Presentation.pptx)
 
 ## 🚀 How to run <a name="install"></a>
 *The following instructions are going to show you how to set up the project*
